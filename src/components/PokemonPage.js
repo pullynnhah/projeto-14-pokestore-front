@@ -7,6 +7,7 @@ import Loader from "./Loader";
 import Descriptor from "./Descriptor";
 import Type from "../tools/Type";
 import {FaShoppingCart} from "react-icons/fa";
+import CartButton from "./CartButton";
 
 export default function PokemonPage() {
   const {pokedexNumber: pokedexNum} = useParams();
@@ -43,10 +44,7 @@ export default function PokemonPage() {
         <p className="class">{classfication}</p>
         <Descriptor {...pokemon} type={type} />
         <p className="price">$ {totalPrice.toFixed(2)}</p>
-        <button>
-          <FaShoppingCart className="icon" />
-          Add to cart
-        </button>
+        <CartButton type={type} />
       </Wrapper>
     </Page>
   );
@@ -77,28 +75,9 @@ const Wrapper = styled.section`
 
   .price {
     font-weight: 800;
-    font-size: 42px;
+    font-size: 34px;
     line-height: 42px;
     margin: 50px 0;
     color: ${props => props.theme[props.type].dark};
-  }
-
-  // TODO: create a button component
-  button {
-    width: 100%;
-    height: 70px;
-    font-weight: 700;
-    font-size: 26px;
-
-    background-color: ${props => props.theme[props.type].light};
-    color: ${props => props.theme.white};
-    margin-bottom: 50px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10%;
-
-    border-radius: 10px;
   }
 `;

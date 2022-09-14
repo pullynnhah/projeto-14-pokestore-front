@@ -37,9 +37,9 @@ export const theme = {
   },
   electric: {
     lighter: "#f4efce",
-    light: "#f3bc54",
-    medium: "#fdb833",
-    dark: "#ed9d02",
+    light: "#dc9a22",
+    medium: "#c38001",
+    dark: "#956200",
   },
   ground: {
     lighter: "#e6c8b5",
@@ -49,9 +49,9 @@ export const theme = {
   },
   psychic: {
     lighter: "#f1d1d7",
-    light: "#fb718c",
-    medium: "#f85777",
-    dark: "#fb385e",
+    light: "#f85777",
+    medium: "#fb385e",
+    dark: "#de1139",
   },
   bug: {
     lighter: "#e9f1d0",
