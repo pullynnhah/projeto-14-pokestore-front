@@ -6,48 +6,63 @@ export const theme = {
   pokemonBlue: "#063B79",
   pokemonYellow: "#ffcb05",
   grass: {
+    lighter: "#caf4d5",
     light: "#67de85",
     medium: "#2DC653",
     dark: "#208B3A",
   },
   fire: {
+    lighter: "#f4cac6",
     light: "#ff6d62",
     medium: "#f85144",
     dark: "#de3d30",
   },
   water: {
+    lighter: "#c7edf4",
     light: "#48cae4",
     medium: "#00b4d8",
     dark: "#0077b6",
   },
   normal: {
+    lighter: "#bdc5ec",
     light: "#4461f1",
     medium: "#2648F1",
     dark: "#112ebe",
   },
   poison: {
+    lighter: "#dbc2f1",
     light: "#a354e6",
     medium: "#7b2cbf",
     dark: "#5a189a",
   },
   eletric: {
+    lighter: "#f4efce",
     light: "#fae260",
     medium: "#ffd53e",
     dark: "#fdb833",
   },
   ground: {
+    lighter: "#e6c8b5",
     light: "#a56336",
     medium: "#815839",
     dark: "#5b412d",
   },
   psychic: {
+    lighter: "#f1d1d7",
     light: "#fb718c",
     medium: "#f85777",
     dark: "#fb385e",
   },
   bug: {
+    lighter: "#e9f1d0",
     light: "#c9e860",
     medium: "#A5C828",
     dark: "#7f9b1b",
+  },
+  default: {
+    lighter: "#eccfcf",
+    light: "#f87474",
+    medium: "#f34e4e",
+    dark: "#f83c3c",
   },
 };
