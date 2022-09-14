@@ -1,6 +1,10 @@
 export const theme = {
   white: "#fafafa",
   black: "#333",
+  pokemonRed: "#f85144",
+  pokemonLightBlue: "#5ba6fd",
+  pokemonBlue: "#063B79",
+  pokemonYellow: "#ffcb05",
   grass: {
     light: "#67de85",
     medium: "#2DC653",

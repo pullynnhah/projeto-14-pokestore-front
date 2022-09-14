@@ -5,6 +5,7 @@ import {GlobalStyle} from "./assets/styles/GlobalStyle.sc.js";
 import GlobalContext from "./tools/GlobalContext";
 import LoginPage from "./components/LoginPage.js";
 import {theme} from "./tools/Theme";
+import Page from "./components/Page";
 
 export default function App() {
   const [profile, setProfile] = useState(null);
@@ -17,6 +18,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<LoginPage />} />;
             {/* <Route path="/signup" element={<SignUpPage />} />; */}
+            <Route path="/page" element={<Page></Page>} />;
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
