@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GlobalStyle } from "./components/styles/GlobalStyle.sc";
+import { GlobalStyle } from "./assets/styles/GlobalStyle.sc.js";
 import GlobalContext from "./tools/GlobalContext";
 
 import LoginPage from "./components/LoginPage.js";
