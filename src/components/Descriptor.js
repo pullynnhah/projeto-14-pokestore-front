@@ -4,12 +4,20 @@ export default function Descriptor({weight, height, pokedexNumber, captureRate, 
   return (
     <Wrapper type={type}>
       <h2>Description</h2>
-      <p>
-        Weight: <strong>{weight.toFixed(1)}</strong> <small>kg</small>
-      </p>
-      <p>
-        Height: <strong>{height.toFixed(1)}</strong> <small>m</small>
-      </p>
+      {!weight ? (
+        ""
+      ) : (
+        <p>
+          Weight: <strong>{weight.toFixed(1)}</strong> <small>kg</small>
+        </p>
+      )}
+      {!height ? (
+        ""
+      ) : (
+        <p>
+          Height: <strong>{height.toFixed(1)}</strong> <small>m</small>
+        </p>
+      )}
       <p>
         Pokédex Number: <strong>{pokedexNumber}</strong>
       </p>
