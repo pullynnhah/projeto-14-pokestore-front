@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import {BsFillPersonFill, BsHouseFill, FaShoppingCart} from "react-icons/all";
 
-export default function Footer() {
+export default function Footer({type}) {
   // TODO: based on the route decide which Icon will be active
   return (
-    <Wrapper>
+    <Wrapper type={type}>
       <Icon>
         <BsHouseFill className="icon" />
       </Icon>
@@ -22,8 +22,9 @@ export default function Footer() {
 
 const Wrapper = styled.footer`
   width: 100vw;
-  height: 60px;
+  height: 70px;
 
+  background-color: ${props => props.theme[props.type].lighter};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,11 +33,12 @@ const Wrapper = styled.footer`
   position: fixed;
   bottom: 0;
   left: 0;
+  padding-top: 20px;
 `;
 
 const Icon = styled.div`
   color: ${props => (props.isActive ? props.theme.pokemonLightBlue : props.theme.pokemonBlue)};
-  font-size: ${props => (props.isActive ? "56px" : "44px")};
+  font-size: ${props => (props.isActive ? "50px" : "40px")};
 
   .icon:hover {
     color: ${props => props.theme.pokemonRed};

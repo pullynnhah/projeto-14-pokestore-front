@@ -5,9 +5,9 @@ import logo from "../assets/images/logo.png";
 import squirtle from "../assets/images/squirtleProfile.png";
 import {FaShoppingCart} from "react-icons/fa";
 
-export default function Header() {
+export default function Header({type}) {
   return (
-    <Wrapper>
+    <Wrapper type={type}>
       <img src={logo} alt="Pokéstore logo" className="logo" />
       <FaShoppingCart className="icon" />
       <img src={squirtle} alt="Profile" className="profile" />
@@ -19,6 +19,7 @@ const Wrapper = styled.header`
   height: 70px;
   padding: 0 10%;
 
+  background-color: ${props => props.theme[props.type].light};
   display: grid;
   grid-template-columns: 200px calc(100% - 240px) 40px;
   align-items: center;

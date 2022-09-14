@@ -6,10 +6,10 @@ export const theme = {
   pokemonBlue: "#063B79",
   pokemonYellow: "#ffcb05",
   grass: {
-    lighter: "#caf4d5",
-    light: "#67de85",
-    medium: "#2DC653",
-    dark: "#208B3A",
+    lighter: "#c3f3cf",
+    light: "#1aa73d",
+    medium: "#0b872a",
+    dark: "#005d18",
   },
   fire: {
     lighter: "#f4cac6",
@@ -55,9 +55,9 @@ export const theme = {
   },
   bug: {
     lighter: "#e9f1d0",
-    light: "#c9e860",
-    medium: "#A5C828",
-    dark: "#7f9b1b",
+    light: "#8ca92b",
+    medium: "#5f760e",
+    dark: "#3d4d05",
   },
   default: {
     lighter: "#eccfcf",

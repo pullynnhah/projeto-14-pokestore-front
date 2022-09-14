@@ -1,34 +1,23 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import styled from "styled-components";
+import Type from "../tools/Type";
 
 export default function Page({children, type}) {
-  const types = [
-    "grass",
-    "fire",
-    "water",
-    "normal",
-    "poison",
-    "eletric",
-    "ground",
-    "psychic",
-    "bug",
-  ];
-  if (!types.includes(type)) {
-    type = "default";
-  }
+  type = Type(type);
   return (
     <Wrapper type={type}>
-      <Header />
+      <Header type={type} />
       {children}
-      <Footer />
+      <Footer type={type} />
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  min-height: 100vh;
-  padding: 70px 10% 60px;
+  min-height: calc(100vh - 140px);
+  margin: 70px 0 60px;
+  padding: 0 10%;
   background: linear-gradient(
       ${props => props.theme[props.type].light},
       ${props => props.theme[props.type].lighter}
@@ -40,4 +29,5 @@ const Wrapper = styled.div`
     top: calc(50vh - 75px);
     left: calc(50vw - 75px);
   }
+  overflow: scroll;
 `;
