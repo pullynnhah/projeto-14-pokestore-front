@@ -31,6 +31,7 @@ export default function PokemonPage() {
   }
 
   // TODO: add display for types and legendary pokémon
+  // TODO: what if data is null in pokemon (27)
   const {classfication, name, type1, type2, isLegendary, image} = pokemon;
   const type = Type(type1);
 

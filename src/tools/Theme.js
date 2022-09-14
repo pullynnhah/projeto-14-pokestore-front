@@ -19,9 +19,9 @@ export const theme = {
   },
   water: {
     lighter: "#c7edf4",
-    light: "#48cae4",
-    medium: "#00b4d8",
-    dark: "#0077b6",
+    light: "#25caec",
+    medium: "#03afd1",
+    dark: "#0099bc",
   },
   normal: {
     lighter: "#bdc5ec",
@@ -35,11 +35,11 @@ export const theme = {
     medium: "#7b2cbf",
     dark: "#5a189a",
   },
-  eletric: {
+  electric: {
     lighter: "#f4efce",
-    light: "#fae260",
-    medium: "#ffd53e",
-    dark: "#fdb833",
+    light: "#f3bc54",
+    medium: "#fdb833",
+    dark: "#ed9d02",
   },
   ground: {
     lighter: "#e6c8b5",
@@ -62,7 +62,7 @@ export const theme = {
   default: {
     lighter: "#eccfcf",
     light: "#f87474",
-    medium: "#f34e4e",
-    dark: "#f83c3c",
+    medium: "#f63333",
+    dark: "#d02222",
   },
 };

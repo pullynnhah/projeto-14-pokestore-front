@@ -5,7 +5,7 @@ export default function Type(type) {
     "water",
     "normal",
     "poison",
-    "eletric",
+    "electric",
     "ground",
     "psychic",
     "bug",
