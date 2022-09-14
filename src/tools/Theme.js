@@ -1,6 +1,7 @@
 export const theme = {
   white: "#fafafa",
   black: "#333",
+  gray: "#555",
   pokemonRed: "#f85144",
   pokemonLightBlue: "#5ba6fd",
   pokemonBlue: "#063B79",
@@ -60,7 +61,7 @@ export const theme = {
     dark: "#7f9b1b",
   },
   default: {
-    lighter: "#eccfcf",
+    lighter: "#f1e7e7",
     light: "#f87474",
     medium: "#f34e4e",
     dark: "#f83c3c",
