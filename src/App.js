@@ -18,7 +18,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<LoginPage />} />;
             {/* <Route path="/signup" element={<SignUpPage />} />; */}
-            <Route path="/page" element={<Page></Page>} />;
+            <Route path="/page" element={<Page type={"psychic"}></Page>} />;
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
