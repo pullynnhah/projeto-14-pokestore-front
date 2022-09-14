@@ -11,8 +11,17 @@ function Modelo(body, profile) {
             "movimentationId": body.movimentationId
         }
     };
-    const promise = axios.post(`${mainURL}/movimentation`, body, config );
+    const promise = axios.post(`${mainURL}/movimentation`, body, config);
     return promise;
 };
 
-export { Modelo };
+
+function SignUp(body) {
+
+    const promise = axios.post(`${mainURL}/signup`, body);
+    return promise;
+};
+
+
+
+export { SignUp };

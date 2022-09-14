@@ -2,46 +2,35 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
-import { ThreeDots } from 'react-loader-spinner';
-import { CreateAccount } from "../tools/UseAxios.js";
+import { SignUp } from "../tools/UseAxios.js";
 import logo from "../assets/images/logo.png";
-
+import LoadSpinners from "../assets/styles/LoadSpinners.js";
 
 function SignUpPage() {
     console.log()
     const navigate = useNavigate();
     const [isDisable, SetIsDisable] = useState(false);
-    const load = (isDisable ? <ThreeDots
-        height="80"
-        width="80"
-        radius="9"
-        color="#FFFFFF"
-        ariaLabel="three-dots-loading"
-        wrapperStyle={{}}
-        wrapperClassName=""
-        visible={true} />
-        : "Sign-up");
 
     function handleForm(e) {
         e.preventDefault();
         SetIsDisable(true);
-        // if (e.target[2].value === e.target[3].value) {
-        //     const body = {
-        //         name: e.target[0].value,
-        //         email: e.target[1].value,
-        //         password: e.target[2].value
-        //     }
-        //     CreateAccount(body).then(
-        //         () => { return (navigate("/")) }
-        //     ).catch((error) => {
-        //         console.error(error)
-        //         alert(`${error.response.data}`);
-        //         SetIsDisable(false);
-        //     });
-        // } else {
-        //     SetIsDisable(false);
-        //     alert("Por favor, verifique os dados inseridos");
-        // }
+        if (e.target[2].value === e.target[3].value) {
+            const body = {
+                name: e.target[0].value,
+                email: e.target[1].value,
+                password: e.target[2].value
+            }
+            SignUp(body).then(
+                () => { return (navigate("/")) }
+            ).catch((error) => {
+                console.error(error)
+                alert(`${error.response.data}`);
+                SetIsDisable(false);
+            });
+        } else {
+            SetIsDisable(false);
+            alert("Por favor, verifique os dados inseridos");
+        }
 
     }
 
@@ -76,11 +65,11 @@ function SignUpPage() {
                         placeholder="Confirm password"
                         disabled={isDisable}
                         required />
-                    <Registbutton disabled={isDisable} bluur={isDisable}>{load}</Registbutton>
+                    <Registbutton disabled={isDisable} bluur={isDisable}>{LoadSpinners("Sign-up", isDisable)}</Registbutton>
                 </RegistrationForm>
 
                 <Link to={`/`} >
-                    <New>Já tem uma conta? Faça login!</New>
+                    <New>Take me to login page!</New>
                 </Link>
             </Container>
 
@@ -113,7 +102,7 @@ const Logo = styled.h1`
 `
 const New = styled.p`
     font-size: 14;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Nunito', sans-serif;
     color: ${props => props.theme.default.medium};
     text-decoration-line: underline;
     a{
@@ -156,7 +145,6 @@ const Registbutton = styled.button`
     color: #FFFFFF;
     margin-bottom: 25px;
     opacity: ${props => props.bluur ? 0.7 : 1};
-    /* text-transform: uppercase */
 `
 
 export default SignUpPage;
