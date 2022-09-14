@@ -86,6 +86,6 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    // TODO: add fonts
+    font-family: 'Nunito', sans-serif;
   }
 `;
