@@ -34,4 +34,10 @@ const Wrapper = styled.div`
       ${props => props.theme[props.type].lighter}
     )
     fixed;
+
+  .fidget-wrapper {
+    position: fixed;
+    top: calc(50vh - 75px);
+    left: calc(50vw - 75px);
+  }
 `;
