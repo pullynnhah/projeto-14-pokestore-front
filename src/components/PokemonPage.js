@@ -6,14 +6,15 @@ import Page from "./Page";
 import Loader from "./Loader";
 import Descriptor from "./Descriptor";
 import Type from "../tools/Type";
-import {FaShoppingCart} from "react-icons/fa";
 import CartButton from "./CartButton";
+import Counter from "./Counter";
 
 export default function PokemonPage() {
   const {pokedexNumber: pokedexNum} = useParams();
 
   const [pokemon, setPokemon] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     const promise = getPokemon(pokedexNum);
@@ -32,8 +33,7 @@ export default function PokemonPage() {
   }
 
   // TODO: add display for types and legendary pokémon
-  // TODO: what if data is null in pokemon (27)
-  const {classfication, name, type1, type2, isLegendary, image} = pokemon;
+  const {classfication, name, type1, type2, isLegendary, price, image} = pokemon;
   const type = Type(type1);
 
   return (
@@ -44,6 +44,13 @@ export default function PokemonPage() {
         <p className="class">{classfication}</p>
         <Descriptor {...pokemon} type={type} />
         <p className="price">$ {totalPrice.toFixed(2)}</p>
+        <Counter
+          type={type}
+          count={count}
+          setCount={setCount}
+          price={price}
+          setTotalPrice={setTotalPrice}
+        />
         <CartButton type={type} />
       </Wrapper>
     </Page>
@@ -75,9 +82,9 @@ const Wrapper = styled.section`
 
   .price {
     font-weight: 800;
-    font-size: 34px;
-    line-height: 42px;
-    margin: 50px 0;
+    font-size: 30px;
+    line-height: 36px;
+    margin: 20px 0;
     color: ${props => props.theme[props.type].dark};
   }
 `;

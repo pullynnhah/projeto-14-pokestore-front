@@ -10,6 +10,7 @@ export default function CartButton({type}) {
   );
 }
 
+// TODO: add loader ---> waiting for pull request for loader
 const Button = styled.button`
   width: 100%;
   height: 70px;
