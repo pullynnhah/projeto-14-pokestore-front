@@ -1,7 +1,7 @@
 import { ThreeDots } from 'react-loader-spinner';
 
-function LoadSpinners(text, isDisable) {
-    
+function LoadSpinners({children, isDisable}) {
+    const text = children;
     const load = (isDisable ? <ThreeDots
         height="80"
         width="80"

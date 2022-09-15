@@ -3,6 +3,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+
+function Login(body) {
+    const promise = axios.post(`${process.env.REACT_APP_API_URI}/login`, body);
+    return promise;
+};
+
 function SignUp(body) {
   const promise = axios.post(`${process.env.REACT_APP_API_URI}/signup`, body);
   return promise;
@@ -14,4 +20,4 @@ function getPokemon(pokedexNumber) {
   return axios.get(`${process.env.REACT_APP_API_URI}/pokemon/${pokedexNumber}`);
 }
 
-export {getPokemon, SignUp};
+export { SignUp, Login, getPokemon };
