@@ -9,6 +9,16 @@ function Login(body) {
     return promise;
 };
 
+function getPokemons(body) {
+    const config = {
+        headers: {
+            "type":body.type 
+        }
+    };
+    const promise = axios.get(`${process.env.REACT_APP_API_URI}/pokemons`, config);
+    return promise;
+};
+
 function SignUp(body) {
   const promise = axios.post(`${process.env.REACT_APP_API_URI}/signup`, body);
   return promise;
@@ -20,4 +30,4 @@ function getPokemon(pokedexNumber) {
   return axios.get(`${process.env.REACT_APP_API_URI}/pokemon/${pokedexNumber}`);
 }
 
-export { SignUp, Login, getPokemon };
+export { SignUp, Login, getPokemon, getPokemons };

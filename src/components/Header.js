@@ -18,7 +18,6 @@ const Wrapper = styled.header`
   width: 100vw;
   height: 70px;
   padding: 0 10%;
-
   background-color: ${props => props.theme[props.type].light};
   display: grid;
   grid-template-columns: 200px calc(100% - 240px) 40px;
