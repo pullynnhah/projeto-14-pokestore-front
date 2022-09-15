@@ -3,7 +3,6 @@ import Footer from "./Footer";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { getPokemons } from "../tools/UseAxios";
-import Page from "./Page";
 
 
 export default function HomePage({ children, type }) {
@@ -75,7 +74,7 @@ export default function HomePage({ children, type }) {
 
     return (
         <Wrapper type={homeType}>
-            <Header />
+            <Header type={homeType} />
             <FilterBar type={homeType}>
                 {typeSelections.length === 0 ? "" : typeSelections.map((typeSelection, index) =>
                 (<Button selected={typeSelection.selected} onClick={() => { selectType(index) }} type={typeFinder(typeSelection.type)}>
@@ -90,7 +89,7 @@ export default function HomePage({ children, type }) {
                     <div>${pokemon.price}</div>
                 </PokemonCard>))}
             </Pokemons>
-            <Footer />
+            <Footer type={homeType}/>
         </Wrapper>
     );
 }
@@ -105,10 +104,8 @@ const Wrapper = styled.div`
         fixed;
     `
 const FilterBar = styled.div`
-    width: 100%;
-    height: auto;
-    padding-top: 20px;
-    padding-bottom: 10px;
+    
+    height: auto;   
     background: linear-gradient(
         ${props => props.theme[props.type].dark},
         ${props => props.theme[props.type].medium},
@@ -117,14 +114,13 @@ const FilterBar = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-`
-const Hidden = styled.div`
-    display: none;
+    overflow-x: auto;
+    padding: 20px 10px 10px 10px;  
 `
 const Button = styled.div`
-    width: 75px;
-    height: 30px;
+    min-width: 100px;
+    width: 100px;
+    height: 45px;
     background: linear-gradient(
         ${props => props.theme[props.type].light},
         ${props => props.theme[props.type].dark},
@@ -138,7 +134,8 @@ const Button = styled.div`
     margin-left: 10px;
     margin-bottom: 10px;
     cursor: pointer;
-    color: ${props => props.theme[props.type].light};
+    color: ${props => props.theme.white};
+    font-weight: 800;
     box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
 `
 const Pokemons = styled.div`
@@ -147,6 +144,8 @@ const Pokemons = styled.div`
     display: flex;
     justify-content: start;
     flex-wrap: wrap;
+    margin-bottom: 70px;
+    padding-bottom: 20px;
 `
 const PokemonCard = styled.div`
     width: 150px;
