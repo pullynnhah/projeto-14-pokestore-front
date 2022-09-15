@@ -9,7 +9,7 @@ import SignUpPage from "./components/SignUpPage"
 import LoginPage from "./components/LoginPage.js";
 
 export default function App() {
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState(JSON.parse(localStorage.getItem("profile")));
 
   return (
     <ThemeProvider theme={theme}>

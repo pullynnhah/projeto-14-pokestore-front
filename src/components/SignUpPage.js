@@ -65,7 +65,7 @@ function SignUpPage() {
                         placeholder="Confirm password"
                         disabled={isDisable}
                         required />
-                    <Registbutton disabled={isDisable} bluur={isDisable}>{LoadSpinners("Sign-up", isDisable)}</Registbutton>
+                    <Registbutton disabled={isDisable} bluur={isDisable}>{<LoadSpinners isDisable={isDisable}>Sign-up</LoadSpinners>}</Registbutton>
                 </RegistrationForm>
 
                 <Link to={`/`} >
@@ -113,7 +113,6 @@ const RegistrationForm = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     input{
         width: 303px;
         height: 45px;
