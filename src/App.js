@@ -3,13 +3,13 @@ import {ThemeProvider} from "styled-components";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {GlobalStyle} from "./assets/styles/GlobalStyle.sc.js";
 import GlobalContext from "./tools/GlobalContext";
-import LoginPage from "./components/LoginPage.js";
-import HomePage from "./components/HomePage.js";
+import LoginPage from "./components/pages/LoginPage.js";
+import HomePage from "./components/pages/HomePage.js";
 import {theme} from "./tools/Theme";
-import PokemonPage from "./components/PokemonPage";
+import PokemonPage from "./components/pages/PokemonPage";
 import Page from "./components/commons/Page";
-import SignUpPage from "./components/SignUpPage";
-import CartPage from "./components/CartPage";
+import SignUpPage from "./components/pages/SignUpPage";
+import CartPage from "./components/pages/CartPage";
 import {IoSettings} from "react-icons/io5";
 
 export default function App() {
