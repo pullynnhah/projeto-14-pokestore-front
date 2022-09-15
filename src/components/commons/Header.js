@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 
 // TODO: remove this import
-import squirtle from "../assets/images/squirtleProfile.png";
+import squirtle from "../../assets/images/squirtleProfile.png";
 import {FaShoppingCart} from "react-icons/fa";
 
 export default function Header({type}) {
