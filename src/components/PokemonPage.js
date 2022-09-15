@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom";
 import Page from "./Page";
 import Loader from "./Loader";
 import Descriptor from "./Descriptor";
-import Type from "../tools/Type";
+import typeFinder from "../tools/typeFinder";
 import CartButton from "./CartButton";
 import Counter from "./Counter";
 
@@ -34,7 +34,7 @@ export default function PokemonPage() {
 
   // TODO: add display for types and legendary pokémon
   const {classfication, name, type1, type2, isLegendary, price, image} = pokemon;
-  const type = Type(type1);
+  const type = typeFinder(type1);
 
   return (
     <Page type={type}>

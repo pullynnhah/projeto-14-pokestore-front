@@ -1,4 +1,4 @@
-export default function Type(type) {
+export default function typeFinder(type) {
   const types = [
     "grass",
     "fire",

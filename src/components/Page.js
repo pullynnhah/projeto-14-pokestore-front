@@ -1,10 +1,10 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import styled from "styled-components";
-import Type from "../tools/Type";
+import typeFinder from "../tools/typeFinder";
 
 export default function Page({children, type}) {
-  type = Type(type);
+  type = typeFinder(type);
   return (
     <Wrapper type={type}>
       <Header type={type} />
