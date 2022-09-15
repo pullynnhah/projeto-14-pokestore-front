@@ -9,6 +9,7 @@ import {theme} from "./tools/Theme";
 import PokemonPage from "./components/PokemonPage";
 import Page from "./components/Page";
 import SignUpPage from "./components/SignUpPage";
+import CartPage from "./components/CartPage";
 
 export default function App() {
   const [profile, setProfile] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -19,11 +20,12 @@ export default function App() {
       <GlobalContext.Provider value={{profile, setProfile}}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LoginPage />} />;
-            <Route path="/signup" element={<SignUpPage />} />;
-            <Route path="/home" element={<HomePage type={"default"} />} />;
-            <Route path="/page" element={<Page type={"psychic"}></Page>} />;
-            <Route path="/pokemon/:pokedexNumber" element={<PokemonPage />} />;
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/home" element={<HomePage type={"default"} />} />
+            <Route path="/page" element={<Page type={"psychic"}></Page>} />
+            <Route path="/pokemon/:pokedexNumber" element={<PokemonPage />} />
+            <Route path="/cart" element={<CartPage />} />
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
