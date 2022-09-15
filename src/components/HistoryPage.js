@@ -66,7 +66,7 @@ const HistoryContainer = styled.div`
 `
 const PurchaseHistory = styled.div`
     width: 400px;
-    height: 100%;
+    height: 120px;
     background: linear-gradient(
         ${props => props.theme[props.type].lighter},
         ${props => props.theme[props.type].light}
@@ -77,6 +77,7 @@ const PurchaseHistory = styled.div`
     justify-content: center;
     padding: 10px;
     margin: 15px;
+    overflow-y: auto;
     div{
         color: black;
         font-size: 15px;   
