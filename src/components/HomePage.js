@@ -1,42 +1,46 @@
-import Header from "./commons/Header";
-import Footer from "./commons/Footer";
+import Header from "./Header";
+import Footer from "./Footer";
 import styled from "styled-components";
-import {useEffect, useState} from "react";
-import {getPokemons} from "../tools/UseAxios";
+import { useEffect, useState } from "react";
+import { getPokemons } from "../tools/UseAxios";
 
-export default function HomePage({children, type}) {
-  const [pokemons, setPokemons] = useState([]);
-  const [homeType, setHomeType] = useState(type);
-  const [typeSelections, setTypeSelections] = useState([
-    {type: "all", selected: "none"},
-    {type: "grass", selected: "none"},
-    {type: "electric", selected: "none"},
-    {type: "fire", selected: "none"},
-    {type: "water", selected: "none"},
-    {type: "normal", selected: "none"},
-    {type: "poison", selected: "none"},
-    {type: "ground", selected: "none"},
-    {type: "psychic", selected: "none"},
-    {type: "bug", selected: "none"},
-  ]);
 
-  function typeFinder(ty) {
-    const types = [
-      "grass",
-      "fire",
-      "water",
-      "normal",
-      "poison",
-      "electric",
-      "ground",
-      "psychic",
-      "bug",
-    ];
-    if (!types.includes(ty)) {
-      ty = "default";
+export default function HomePage({ children, type }) {
+
+    const [pokemons, setPokemons] = useState([]);
+    const [homeType, setHomeType] = useState(type);
+    const [typeSelections, setTypeSelections] = useState([{ type: "all", selected: "none" },
+    { type: "grass", selected: "none" },
+    { type: "electric", selected: "none" },
+    { type: "fire", selected: "none" },
+    { type: "water", selected: "none" },
+    { type: "normal", selected: "none" },
+    { type: "poison", selected: "none" },
+    { type: "ground", selected: "none" },
+    { type: "psychic", selected: "none" },
+    { type: "bug", selected: "none" },
+    { type: "legendary", selected: "none" },
+    { type: "others", selected: "none" },
+    ]);
+
+    function typeFinder(ty) {
+        const types = [
+            "grass",
+            "fire",
+            "water",
+            "normal",
+            "poison",
+            "electric",
+            "ground",
+            "psychic",
+            "bug",
+            "legendary"
+        ];
+        if (!types.includes(ty)) {
+            ty = "default";
+        }
+        return ty;
     }
-    return ty;
-  }
 
   useEffect(() => {
     const pokeType = {type: "all"};

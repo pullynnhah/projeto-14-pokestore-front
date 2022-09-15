@@ -39,7 +39,7 @@ function SignUpPage() {
     return (
         <Wrapper>
             <Container>
-                <Logo><img src={logo} alt="logo"/></Logo>
+                <Logo><img src={logo} alt="logo" /></Logo>
 
                 <RegistrationForm onSubmit={handleForm}>
                     <input type="text"
@@ -99,6 +99,8 @@ const Container = styled.div`
 const Logo = styled.h1`
     width: 80vw;
     margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
 `
 const New = styled.p`
     font-size: 14;
