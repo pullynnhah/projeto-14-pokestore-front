@@ -3,17 +3,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-function Modelo(body, profile) {
-  const config = {
-    headers: {
-      Authorization: profile.token,
-      user: profile.userId,
-      movimentationId: body.movimentationId,
-    },
-  };
-  const promise = axios.post(`${process.env.REACT_APP_API_URI}/movimentation`, body, config);
-  return promise;
-}
+
+function SignUp(body) {
+    const promise = axios.post(`${mainURL}/signup`, body);
+    return promise;
+};
 
 // TODO: add validation
 function getPokemon(pokedexNumber) {
@@ -21,4 +15,4 @@ function getPokemon(pokedexNumber) {
   return axios.get(`${process.env.REACT_APP_API_URI}/pokemon/${pokedexNumber}`);
 }
 
-export {getPokemon};
+export {getPokemon, SignUp};
