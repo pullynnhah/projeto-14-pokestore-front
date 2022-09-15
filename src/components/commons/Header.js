@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 
 // TODO: remove this import
-import squirtle from "../assets/images/squirtleProfile.png";
+import squirtle from "../../assets/images/squirtleProfile.png";
 import {FaShoppingCart} from "react-icons/fa";
 
 export default function Header({type}) {
@@ -24,6 +24,7 @@ const Wrapper = styled.header`
   align-items: center;
   justify-content: center;
   gap: 6%;
+  z-index: 1;
 
   position: fixed;
   top: 0;
@@ -38,11 +39,6 @@ const Wrapper = styled.header`
     font-size: 36px;
     color: ${props => props.theme.pokemonBlue};
     transition: all 500ms;
-  }
-
-  .icon:hover {
-    color: ${props => props.theme.pokemonYellow};
-    transform: scale(1.1);
   }
 
   .profile {

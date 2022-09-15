@@ -2,11 +2,11 @@ import styled from "styled-components";
 import {useEffect, useState} from "react";
 import {getPokemon} from "../tools/UseAxios";
 import {useParams} from "react-router-dom";
-import Page from "./Page";
-import Loader from "./Loader";
+import Page from "./commons/Page";
+import Loader from "./commons/Loader";
 import Descriptor from "./Descriptor";
 import typeFinder from "../tools/typeFinder";
-import CartButton from "./CartButton";
+import AddCartButton from "./AddCartButton";
 import Counter from "./Counter";
 
 export default function PokemonPage() {
@@ -51,7 +51,7 @@ export default function PokemonPage() {
           price={price}
           setTotalPrice={setTotalPrice}
         />
-        <CartButton type={type} />
+        <AddCartButton type={type} />
       </Wrapper>
     </Page>
   );
