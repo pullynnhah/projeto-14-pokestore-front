@@ -7,10 +7,8 @@ import LoginPage from "./components/pages/LoginPage.js";
 import HomePage from "./components/pages/HomePage.js";
 import {theme} from "./tools/Theme";
 import PokemonPage from "./components/pages/PokemonPage";
-import Page from "./components/commons/Page";
 import SignUpPage from "./components/pages/SignUpPage";
 import CartPage from "./components/pages/CartPage";
-import {IoSettings} from "react-icons/io5";
 
 export default function App() {
   const [profile, setProfile] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -26,7 +24,6 @@ export default function App() {
             <Route path="/home" element={<HomePage type={"default"} />} />
             <Route path="/pokemon/:pokedexNumber" element={<PokemonPage />} />
             <Route path="/cart" element={<CartPage />} />
-            <IoSettings />
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
