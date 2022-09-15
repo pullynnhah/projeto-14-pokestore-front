@@ -5,7 +5,9 @@ import {GlobalStyle} from "./assets/styles/GlobalStyle.sc.js";
 import GlobalContext from "./tools/GlobalContext";
 import LoginPage from "./components/LoginPage.js";
 import {theme} from "./tools/Theme";
+import PokemonPage from "./components/PokemonPage";
 import Page from "./components/Page";
+import Loader from "./components/Loader";
 
 export default function App() {
   const [profile, setProfile] = useState(null);
@@ -18,7 +20,15 @@ export default function App() {
           <Routes>
             <Route path="/" element={<LoginPage />} />;
             {/* <Route path="/signup" element={<SignUpPage />} />; */}
-            <Route path="/page" element={<Page type={"psychic"}></Page>} />;
+            <Route path="/pokemon/:pokedexNumber" element={<PokemonPage />} />;
+            <Route
+              path="/loader"
+              element={
+                <Page>
+                  <Loader />
+                </Page>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
