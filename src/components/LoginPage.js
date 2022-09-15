@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
-
 import GlobalContext from "../tools/GlobalContext.js";
 import { Login } from "../tools/UseAxios.js";
 import logo from "../assets/images/logo.png";
