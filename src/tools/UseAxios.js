@@ -1,27 +1,18 @@
 import axios from "axios";
+import dotenv from "dotenv";
 
-const mainURL = "http://localhost:5000";
-
-
-function Modelo(body, profile) {
-    const config = {
-        headers: {
-            "Authorization": profile.token,
-            "user": profile.userId,
-            "movimentationId": body.movimentationId
-        }
-    };
-    const promise = axios.post(`${mainURL}/movimentation`, body, config);
-    return promise;
-};
+dotenv.config();
 
 
 function SignUp(body) {
-
     const promise = axios.post(`${mainURL}/signup`, body);
     return promise;
 };
 
+// TODO: add validation
+function getPokemon(pokedexNumber) {
+  console.log(process.env.REACT_APP_API_URI);
+  return axios.get(`${process.env.REACT_APP_API_URI}/pokemon/${pokedexNumber}`);
+}
 
-
-export { SignUp };
+export {getPokemon, SignUp};
