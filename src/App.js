@@ -8,7 +8,6 @@ import PokemonPage from "./components/PokemonPage";
 import Page from "./components/Page";
 import SignUpPage from "./components/SignUpPage"
 import LoginPage from "./components/LoginPage.js";
-import Loader from "./components/Loader";
 
 export default function App() {
   const [profile, setProfile] = useState(JSON.parse(localStorage.getItem("profile")));
