@@ -23,8 +23,8 @@ function LoginPage() {
             await localStorage.setItem("profile",
                 JSON.stringify({
                     token: res.data.token,
-                    userId: res.data._id,
-                    userPicture: res.data.picture
+                    userId: res.data.userId,
+                    userPicture: res.data.userPicture
                 })
             );
             setProfile(JSON.parse(localStorage.getItem("profile")));
