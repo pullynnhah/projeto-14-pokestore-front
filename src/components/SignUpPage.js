@@ -1,65 +1,83 @@
-import { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import GlobalContext from "../tools/GlobalContext.js";
-import { Login } from "../tools/UseAxios.js";
+import { useState } from "react";
+import { SignUp } from "../tools/UseAxios.js";
 import logo from "../assets/images/logo.png";
 import LoadSpinners from "../assets/styles/LoadSpinners.js";
 
-function LoginPage() {
-    // eslint-disable-next-line no-unused-vars
-    const { profile, setProfile } = useContext(GlobalContext);
-    const [isDisable, setIsDisable] = useState(false);
+function SignUpPage() {
+    console.log()
     const navigate = useNavigate();
+    const [isDisable, SetIsDisable] = useState(false);
 
     function handleForm(e) {
         e.preventDefault();
-        setIsDisable(true);
-        const body = {
-            email: e.target[0].value,
-            password: e.target[1].value
-        };
-        Login(body).then(async (res) => {
-            await localStorage.setItem("profile",
-                JSON.stringify({
-                    token: res.data.token,
-                    userId: res.data.userId,
-                    userPicture: res.data.userPicture
-                })
-            );
-            setProfile(JSON.parse(localStorage.getItem("profile")));
-            return (navigate("/home"));
-        }).catch((error) => {
-            console.error(error);
-            alert(`${error.response.data}`);
-            setIsDisable(false);
-        });
+        SetIsDisable(true);
+        if (e.target[2].value === e.target[3].value) {
+            const body = {
+                name: e.target[0].value,
+                email: e.target[1].value,
+                password: e.target[2].value
+            }
+            SignUp(body).then(
+                () => { return (navigate("/")) }
+            ).catch((error) => {
+                console.error(error)
+                alert(`${error.response.data}`);
+                SetIsDisable(false);
+            });
+        } else {
+            SetIsDisable(false);
+            alert("Por favor, verifique os dados inseridos");
+        }
+
     }
+
+
 
     return (
         <Wrapper>
             <Container>
-                <Logo><img src={logo} alt="logo" /></Logo>
-                <Loginform onSubmit={handleForm}>
+                <Logo><img src={logo} alt="logo"/></Logo>
+
+                <RegistrationForm onSubmit={handleForm}>
+                    <input type="text"
+                        name="name"
+                        placeholder="Name"
+                        disabled={isDisable}
+                        required />
+
                     <input type="email"
                         name="email"
-                        placeholder="email"
+                        placeholder="E-mail"
                         disabled={isDisable}
                         required />
+
                     <input type="password"
                         name="password"
-                        placeholder="password"
+                        placeholder="Password"
                         disabled={isDisable}
                         required />
-                    <Loginbutton disabled={isDisable} bluur={isDisable}>{<LoadSpinners isDisable={isDisable}>Log-in</LoadSpinners>}</Loginbutton>
-                </Loginform>
-                <Link to={`/signup`} >
-                    <New>First time here? Sign-Up!</New>
+
+                    <input type="password"
+                        name="password confirmation"
+                        placeholder="Confirm password"
+                        disabled={isDisable}
+                        required />
+                    <Registbutton disabled={isDisable} bluur={isDisable}>{<LoadSpinners isDisable={isDisable}>Sign-up</LoadSpinners>}</Registbutton>
+                </RegistrationForm>
+
+                <Link to={`/`} >
+                    <New>Take me to login page!</New>
                 </Link>
             </Container>
+
         </Wrapper>
     );
 }
+
+
 
 const Wrapper = styled.div`
     height: 100%;
@@ -91,7 +109,7 @@ const New = styled.p`
         text-decoration: none;
     }
 `
-const Loginform = styled.form`
+const RegistrationForm = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,7 +130,7 @@ const Loginform = styled.form`
         color: ${props => props.theme.default.dark};
         }
 `
-const Loginbutton = styled.button`
+const Registbutton = styled.button`
     height: 45px;
     width: 300px;
     display: flex;
@@ -128,4 +146,4 @@ const Loginbutton = styled.button`
     opacity: ${props => props.bluur ? 0.7 : 1};
 `
 
-export default LoginPage;
+export default SignUpPage;

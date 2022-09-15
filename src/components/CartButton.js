@@ -1,0 +1,30 @@
+import {FaShoppingCart} from "react-icons/fa";
+import styled from "styled-components";
+
+export default function CartButton({type}) {
+  return (
+    <Button type={type}>
+      <FaShoppingCart className="icon" />
+      Add to cart
+    </Button>
+  );
+}
+
+// TODO: add loader ---> waiting for pull request for loader
+const Button = styled.button`
+  width: 100%;
+  height: 70px;
+  font-weight: 700;
+  font-size: 26px;
+
+  background-color: ${props => props.theme[props.type].light};
+  color: ${props => props.theme.white};
+  margin-bottom: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+
+  border-radius: 10px;
+`;

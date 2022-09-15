@@ -1,20 +1,13 @@
 import axios from "axios";
+import dotenv from "dotenv";
 
-const mainURL = "http://localhost:5000";
+dotenv.config();
 
 
-function Modelo(body, profile) {
-    const config = {
-        headers: {
-            "Authorization": profile.token,
-            "user": profile.userId,
-            "movimentationId": body.movimentationId
-        }
-    };
-    const promise = axios.post(`${mainURL}/movimentation`, body, config );
+function Login(body) {
+    const promise = axios.post(`${process.env.REACT_APP_API_URI}/login`, body);
     return promise;
 };
-
 
 function getPokemons(body) {
     const config = {
@@ -22,8 +15,19 @@ function getPokemons(body) {
             "type":body.type 
         }
     };
-    const promise = axios.get(`${mainURL}/pokemons`, config);
+    const promise = axios.get(`${process.env.REACT_APP_API_URI}/pokemons`, config);
     return promise;
 };
 
-export { Modelo, getPokemons };
+function SignUp(body) {
+  const promise = axios.post(`${process.env.REACT_APP_API_URI}/signup`, body);
+  return promise;
+}
+
+// TODO: add validation
+function getPokemon(pokedexNumber) {
+  console.log(process.env.REACT_APP_API_URI);
+  return axios.get(`${process.env.REACT_APP_API_URI}/pokemon/${pokedexNumber}`);
+}
+
+export { SignUp, Login, getPokemon, getPokemons };

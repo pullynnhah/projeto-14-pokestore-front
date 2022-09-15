@@ -1,15 +1,16 @@
 export const theme = {
   white: "#fafafa",
   black: "#333",
+  gray: "#555",
   pokemonRed: "#f85144",
   pokemonLightBlue: "#5ba6fd",
   pokemonBlue: "#063B79",
   pokemonYellow: "#ffcb05",
   grass: {
-    lighter: "#caf4d5",
-    light: "#67de85",
-    medium: "#2DC653",
-    dark: "#208B3A",
+    lighter: "#c3f3cf",
+    light: "#1aa73d",
+    medium: "#0b872a",
+    dark: "#005d18",
   },
   fire: {
     lighter: "#f4cac6",
@@ -19,9 +20,9 @@ export const theme = {
   },
   water: {
     lighter: "#c7edf4",
-    light: "#48cae4",
-    medium: "#00b4d8",
-    dark: "#0077b6",
+    light: "#25caec",
+    medium: "#03afd1",
+    dark: "#0099bc",
   },
   normal: {
     lighter: "#bdc5ec",
@@ -36,10 +37,10 @@ export const theme = {
     dark: "#5a189a",
   },
   electric: {
-    lighter: "#f4efce",
-    light: "#fae260",
-    medium: "#ffd53e",
-    dark: "#fdb833",
+    lighter: "#f4e8db",
+    light: "#f4b254",
+    medium: "#e6972e",
+    dark: "#e18002",
   },
   ground: {
     lighter: "#e6c8b5",
@@ -49,20 +50,20 @@ export const theme = {
   },
   psychic: {
     lighter: "#f1d1d7",
-    light: "#fb718c",
-    medium: "#f85777",
-    dark: "#fb385e",
+    light: "#f47a93",
+    medium: "#f14667",
+    dark: "#de1139",
   },
   bug: {
     lighter: "#e9f1d0",
-    light: "#c9e860",
-    medium: "#A5C828",
-    dark: "#7f9b1b",
+    light: "#8ca92b",
+    medium: "#5f760e",
+    dark: "#3d4d05",
   },
   default: {
-    lighter: "#eccfcf",
+    lighter: "#f1e7e7",
     light: "#f87474",
-    medium: "#f34e4e",
-    dark: "#f83c3c",
+    medium: "#f63333",
+    dark: "#d02222",
   },
 };
