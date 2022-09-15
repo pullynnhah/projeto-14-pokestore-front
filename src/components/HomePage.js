@@ -18,7 +18,10 @@ export default function HomePage({ children, type }) {
     { type: "poison", selected: "none" },
     { type: "ground", selected: "none" },
     { type: "psychic", selected: "none" },
-    { type: "bug", selected: "none" }]);
+    { type: "bug", selected: "none" },
+    { type: "legendary", selected: "none" },
+    { type: "others", selected: "none" },
+    ]);
 
     function typeFinder(ty) {
         const types = [
@@ -31,6 +34,7 @@ export default function HomePage({ children, type }) {
             "ground",
             "psychic",
             "bug",
+            "legendary"
         ];
         if (!types.includes(ty)) {
             ty = "default";
@@ -54,6 +58,7 @@ export default function HomePage({ children, type }) {
         setTypeSelections([...typeSelections]);
         setHomeType(typeFinder(typeSelections[index].type));
         const pokeType = { type: typeSelections[index].type };
+        console.log(pokeType)
         const promisse = getPokemons(pokeType);
         promisse.then(autorized);
         promisse.catch(unautorized);

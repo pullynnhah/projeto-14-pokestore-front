@@ -9,13 +9,14 @@ function Login(body) {
     return promise;
 };
 
+// TODO: add validation
 function getPokemons(body) {
     const config = {
         headers: {
-            "type":body.type 
+            
         }
     };
-    const promise = axios.get(`${process.env.REACT_APP_API_URI}/pokemons`, config);
+    const promise = axios.get(`${process.env.REACT_APP_API_URI}/pokemons?type=${body.type}`, config);
     return promise;
 };
 
