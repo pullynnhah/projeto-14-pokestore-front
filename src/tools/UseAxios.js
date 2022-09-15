@@ -3,11 +3,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-
 function SignUp(body) {
-    const promise = axios.post(`${mainURL}/signup`, body);
-    return promise;
-};
+  const promise = axios.post(`${process.env.REACT_APP_API_URI}/signup`, body);
+  return promise;
+}
 
 // TODO: add validation
 function getPokemon(pokedexNumber) {
