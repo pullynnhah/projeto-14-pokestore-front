@@ -35,7 +35,7 @@ export const theme = {
     medium: "#7b2cbf",
     dark: "#5a189a",
   },
-  eletric: {
+  electric: {
     lighter: "#f4efce",
     light: "#fae260",
     medium: "#ffd53e",

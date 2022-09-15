@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {GlobalStyle} from "./assets/styles/GlobalStyle.sc.js";
 import GlobalContext from "./tools/GlobalContext";
 import LoginPage from "./components/LoginPage.js";
+import HomePage from "./components/HomePage.js";
 import {theme} from "./tools/Theme";
 import Page from "./components/Page";
 
@@ -17,6 +18,7 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LoginPage />} />;
+            <Route path="/home" element={<HomePage type={"default"} />} />;
             {/* <Route path="/signup" element={<SignUpPage />} />; */}
             <Route path="/page" element={<Page type={"psychic"}></Page>} />;
           </Routes>

@@ -15,4 +15,15 @@ function Modelo(body, profile) {
     return promise;
 };
 
-export { Modelo };
+
+function getPokemons(body) {
+    const config = {
+        headers: {
+            "type":body.type 
+        }
+    };
+    const promise = axios.get(`${mainURL}/pokemons`, config);
+    return promise;
+};
+
+export { Modelo, getPokemons };
