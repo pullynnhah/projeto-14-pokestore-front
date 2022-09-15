@@ -81,6 +81,8 @@ const Container = styled.div`
 const Logo = styled.h1`
     width: 80vw;
     margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
 `
 const New = styled.p`
     font-size: 14;
