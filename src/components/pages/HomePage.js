@@ -124,7 +124,7 @@ const FilterBar = styled.div`
     ${props => props.theme[props.type].dark}
   );
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   overflow-x: auto;
   padding: 20px 10px 10px 10px;

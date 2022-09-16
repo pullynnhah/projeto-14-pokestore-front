@@ -6,6 +6,7 @@ import GlobalContext from "./tools/GlobalContext";
 import LoginPage from "./components/pages/LoginPage.js";
 import HomePage from "./components/pages/HomePage.js";
 import {theme} from "./tools/Theme";
+import ProfilePage from "./components/pages/ProfilePage.js";
 import PokemonPage from "./components/pages/PokemonPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import CartPage from "./components/pages/CartPage";
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/home" element={<HomePage type={"default"} />} />
             <Route path="/pokemon/:pokedexNumber" element={<PokemonPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/profile" element={<ProfilePage />} />;
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
