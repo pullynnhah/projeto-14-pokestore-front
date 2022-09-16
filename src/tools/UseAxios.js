@@ -3,10 +3,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-
 function Login(body) {
-    const promise = axios.post(`${process.env.REACT_APP_API_URI}/login`, body);
-    return promise;
+  const promise = axios.post(`${process.env.REACT_APP_API_URI}/login`, body);
+  return promise;
 };
 
 // TODO: add validation
@@ -41,4 +40,14 @@ function getHistory(body) {
     return promise;
 }
 
-export { SignUp, Login, getPokemon, getPokemons, getHistory };
+function Logout(profile) {
+  const config = {
+    headers: {
+      "user": profile.userId
+    }
+  }
+  const promise = axios.delete(`${process.env.REACT_APP_API_URI}/logout`, config);
+  return promise;
+};
+
+export { SignUp, Login, getPokemon, getPokemons, getHistory, Logout };

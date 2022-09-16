@@ -1,7 +1,7 @@
-import Page from "./Page";
+import Page from "../commons/Page.js";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { getHistory } from "../tools/UseAxios";
+import { getHistory } from "../../tools/UseAxios";
 
 
 export default function HistoryPage({ children, type }) {
