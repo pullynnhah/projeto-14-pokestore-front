@@ -111,7 +111,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: flex-start;
     padding: 20px 10px 10px 10px;
-    margin: 65px 0;
+    margin: 65px 0 90px 0;
     background: linear-gradient(
       ${props => props.theme.default.light},
       ${props => props.theme.default.lighter}
@@ -120,7 +120,6 @@ const Container = styled.div`
         margin-top: 50px;
         font: 600 26px/28px "Nunito", sans-serif;
         color: ${props => props.theme.pokemonBlue};
-
     }
 `;
 const EditForm = styled.form`
