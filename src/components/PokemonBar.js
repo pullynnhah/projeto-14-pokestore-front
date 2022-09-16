@@ -38,18 +38,17 @@ export default function PokemonBar({authorized, unauthorized}) {
 
   return (
     <FilterBar type={type}>
-      {typeSelections.length === 0
-        ? ""
-        : typeSelections.map((typeSelection, index) => (
-            <Button
-              selected={typeSelection.selected}
-              onClick={() => {
-                selectType(index);
-              }}
-              type={typeFinder(typeSelection.type)}>
-              {typeSelection.type}
-            </Button>
-          ))}
+      {typeSelections.map((typeSelection, index) => (
+        <Button
+          key={index}
+          selected={typeSelection.selected}
+          onClick={() => {
+            selectType(index);
+          }}
+          type={typeFinder(typeSelection.type)}>
+          {typeSelection.type}
+        </Button>
+      ))}
     </FilterBar>
   );
 }
@@ -68,8 +67,8 @@ const FilterBar = styled.div`
   padding: 20px 10px 10px 10px;
 `;
 const Button = styled.div`
-  min-width: 100px;
-  width: 100px;
+  min-width: 120px;
+  width: 120px;
   height: 45px;
   background: linear-gradient(
     ${props => props.theme[props.type].light},
@@ -86,6 +85,7 @@ const Button = styled.div`
   cursor: pointer;
   color: ${props => props.theme.white};
   font-weight: 800;
-  text-transform: upper;
+  text-transform: uppercase;
+  box-sizing: content-box;
   box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.5);
 `;
