@@ -86,6 +86,5 @@ const Button = styled.div`
   color: ${props => props.theme.white};
   font-weight: 800;
   text-transform: uppercase;
-  box-sizing: content-box;
   box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.5);
 `;
