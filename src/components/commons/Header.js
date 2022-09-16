@@ -49,7 +49,7 @@ export default function Header({ type }) {
       <img src={logo} alt="Pokéstore logo" className="logo" />
       <FaShoppingCart className="icon" />
       <Menu clicked={clicked} type={type} >
-        <div>
+        <div onClick={()=>{return (navigate("/profile"));}}>
           <IoSettings className="icon" />
         </div>
 
@@ -105,7 +105,7 @@ const Wrapper = styled.header`
 `;
 
 const Menu = styled.div`
-  height:  ${props => props.clicked ? "370%" : "100%"};
+  height:  ${props => props.clicked ? "370%" : "98%"};
   width: 60px;
   display: flex;
   flex-direction: column;
@@ -113,7 +113,7 @@ const Menu = styled.div`
   justify-content: flex-end;
   overflow: hidden;
   transition: height 0.5s;
-  border-radius: 0 0 0 10px;
+  border-radius: 0 0 10px 10px;
   border: ${props => props.clicked ? "370%" : "70%"};
   background-color: ${props => props.clicked ? props.theme[props.type].medium : props.theme[props.type].light};
   padding: 10px;
@@ -153,6 +153,7 @@ const LogoutButton = styled.button`
   color: ${props => props.theme.white};
   padding: 5px;
   display: flex;
+  justify-content: center;
   align-items: center;
 `;
 const ButtomBox = styled.div`

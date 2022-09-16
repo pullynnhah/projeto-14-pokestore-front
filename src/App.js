@@ -10,6 +10,7 @@ import ProfilePage from "./components/pages/ProfilePage.js";
 import PokemonPage from "./components/pages/PokemonPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import CartPage from "./components/pages/CartPage";
+import EditProfilePage from "./components/pages/EditProfilePage.js";
 
 export default function App() {
   const [profile, setProfile] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/pokemon/:pokedexNumber" element={<PokemonPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/profile" element={<ProfilePage />} />;
+            <Route path="/profile/edit" element={<EditProfilePage />} />;
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
