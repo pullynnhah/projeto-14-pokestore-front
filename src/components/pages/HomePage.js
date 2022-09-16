@@ -3,8 +3,10 @@ import Footer from "../commons/Footer";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
 import { getPokemons } from "../../tools/UseAxios";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage({children, type}) {
+  const navigate = useNavigate()
   const [pokemons, setPokemons] = useState([]);
   const [homeType, setHomeType] = useState(type);
   const [typeSelections, setTypeSelections] = useState([
@@ -74,6 +76,10 @@ export default function HomePage({children, type}) {
     }
   }
 
+  function pokemonNavigate(pokedexNumber){
+      navigate(`/pokemon/${pokedexNumber}`)
+  }
+
   return (
     <Wrapper type={homeType}>
       <Header type={homeType} />
@@ -95,7 +101,7 @@ export default function HomePage({children, type}) {
         {pokemons.length === 0
           ? ""
           : pokemons.map(pokemon => (
-              <PokemonCard cardColor={typeFinder(pokemon.type1)}>
+              <PokemonCard onClick={()=>{pokemonNavigate(pokemon.pokedexNumber)}} cardColor={typeFinder(pokemon.type1)}>
                 <img src={pokemon.image} />
                 <div>{pokemon.name}</div>
                 <div>${pokemon.price}</div>
@@ -165,6 +171,7 @@ const PokemonCard = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  cursor: pointer;
   background: linear-gradient(
     ${props => props.theme[props.cardColor].dark},
     ${props => props.theme[props.cardColor].medium}
