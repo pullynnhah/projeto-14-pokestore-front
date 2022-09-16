@@ -1,5 +1,5 @@
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../commons/Header";
+import Footer from "../commons/Footer";
 import styled from "styled-components";
 
 function ProfilePage() {

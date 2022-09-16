@@ -1,7 +1,7 @@
 import {FaShoppingCart} from "react-icons/fa";
 import styled from "styled-components";
 
-export default function CartButton({type}) {
+export default function AddCartButton({type}) {
   return (
     <Button type={type}>
       <FaShoppingCart className="icon" />

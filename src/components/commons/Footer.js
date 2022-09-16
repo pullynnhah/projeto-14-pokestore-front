@@ -39,9 +39,5 @@ const Wrapper = styled.footer`
 const Icon = styled.div`
   color: ${props => (props.isActive ? props.theme.pokemonLightBlue : props.theme.pokemonBlue)};
   font-size: ${props => (props.isActive ? "50px" : "40px")};
-
-  .icon:hover {
-    color: ${props => props.theme.pokemonRed};
-    transform: scale(1.1);
-  }
+  z-index: 1;
 `;

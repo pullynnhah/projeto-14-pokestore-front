@@ -66,4 +66,10 @@ export const theme = {
     medium: "#f63333",
     dark: "#d02222",
   },
+  legendary:{
+    lighter:"#fff39f",
+    light:"#ecbc00",
+    medium:"#eba802",
+    dark:"#cc8801"
+  }
 };

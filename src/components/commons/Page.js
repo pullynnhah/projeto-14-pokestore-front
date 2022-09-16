@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import styled from "styled-components";
-import typeFinder from "../tools/typeFinder";
+import typeFinder from "../../tools/typeFinder";
 
 export default function Page({children, type}) {
   type = typeFinder(type);

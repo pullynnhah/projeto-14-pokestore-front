@@ -1,16 +1,16 @@
 import styled from "styled-components";
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoSettings, IoLogOut } from "react-icons/io5";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoadSpinners from "../assets/styles/LoadSpinners.js";
-import { Logout } from "../tools/UseAxios.js";
+import LoadSpinners from "../../assets/styles/LoadSpinners.js";
+import { Logout } from "../../tools/UseAxios.js";
 import { useContext } from "react";
-import GlobalContext from "../tools/GlobalContext.js";
+import GlobalContext from "../../tools/GlobalContext.js";
 
 // TODO: remove this import
-import squirtle from "../assets/images/squirtleProfile.png";
+import squirtle from "../../assets/images/squirtleProfile.png";
 
 
 export default function Header({ type }) {
@@ -81,6 +81,7 @@ const Wrapper = styled.header`
   align-items: center;
   justify-content: center;
   gap: 6%;
+  z-index: 1;
 
   position: fixed;
   top: 0;
@@ -97,11 +98,6 @@ const Wrapper = styled.header`
     transition: all 500ms;
   }
 
-  .icon:hover {
-    color: ${props => props.theme.pokemonYellow};
-    transform: scale(1.1);
-  }
-
   .profile {
     width: 40px;
     border-radius: 50%;
@@ -109,7 +105,7 @@ const Wrapper = styled.header`
 `;
 
 const Menu = styled.div`
-  height:  ${props => props.clicked ? "370%" : "70%"};
+  height:  ${props => props.clicked ? "370%" : "100%"};
   width: 60px;
   display: flex;
   flex-direction: column;
@@ -117,9 +113,10 @@ const Menu = styled.div`
   justify-content: flex-end;
   overflow: hidden;
   transition: height 0.5s;
-  border-radius: 5px;
+  border-radius: 0 0 0 10px;
   border: ${props => props.clicked ? "370%" : "70%"};
   background-color: ${props => props.clicked ? props.theme[props.type].medium : props.theme[props.type].light};
+  padding: 10px;
   div{
     margin-top: 4px;
   }
@@ -146,7 +143,7 @@ const Confirmation = styled.div`
     text-align: center;
   }
 `;
-const LogoutButton = styled.div`
+const LogoutButton = styled.button`
   background-color: ${props => props.theme[props.type].medium};
   height: 5vh;
   width: 25vw;
