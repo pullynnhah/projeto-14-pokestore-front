@@ -1,28 +1,48 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import GlobalContext from "../../tools/GlobalContext.js";
+
 
 // import {SignUp} from "../../tools/UseAxios.js";
 import LoadSpinners from "../../assets/styles/LoadSpinners.js";
 import Header from "../commons/Header";
 import Footer from "../commons/Footer";
+import { GetUser } from "../../tools/UseAxios.js";
 
 
 
 
 
 function EditProfilePage() {
+    const {profile, setProfile} = useContext(GlobalContext);
     const [isDisable, SetIsDisable] = useState(false);
+    const [userData, setUserData] = useState(false)
+    useEffect(() => {
+        const promise = GetUser(profile);
+        promise.then(res => {
+            setUserData(res.data)
+        });
+    }, []);
+
+
 
     function handleForm(e) {
         e.preventDefault();
         SetIsDisable(true);
-        // if (e.target[2].value === e.target[3].value) {
-        //   const body = {
-        //     name: e.target[0].value,
-        //     email: e.target[1].value,
-        //     password: e.target[2].value,
-        //   };
+        if(Number(e.target[4].value) === NaN){
+            return alert("Nº value should be a number");
+        }
+        const body = {
+        name: e.target[0].value.charAt(0).toUpperCase() + e.target[0].value.slice(1),
+        zipCode: e.target[2].value,
+        adress: e.target[3].value.charAt(0).toUpperCase() + e.target[3].value.slice(1),
+        adressNumber: Number(e.target[4].value),
+        neighborhood: e.target[5].value,
+        city: e.target[6].value,
+        contact: e.target[7].value,
+        };
+        console.log(body)
         //   SignUp(body)
         //     .then(() => {
         //       return navigate("/");
@@ -51,7 +71,7 @@ function EditProfilePage() {
 
                     <input type="email"
                         name="email"
-                        placeholder="E-mail"
+                        placeholder={userData.email? userData.email : "Email"}
                         disabled={true} />
 
                     <input type="text"
@@ -66,7 +86,7 @@ function EditProfilePage() {
                         disabled={isDisable}
                         required />
 
-                    <input type="text"
+                    <input type="number"
                         name="Nº"
                         placeholder="Nº"
                         disabled={isDisable}
@@ -84,7 +104,7 @@ function EditProfilePage() {
                         disabled={isDisable}
                         required />
 
-                    <input type="text"
+                    <input type="number"
                         name="Contact"
                         placeholder="Contact"
                         disabled={isDisable}
