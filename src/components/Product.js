@@ -5,11 +5,9 @@ export default function Product({name, type1, isLegendary, image, price, quantit
   const total = price * quantity;
   return (
     <Wrapper type={type1}>
-      <div className="container">
-        <img src={image} alt={name} />
-        <div className="circle">{quantity}</div>
-      </div>
+      <img src={image} alt={name} />
       <h2>{name}</h2>
+      <p className="amount">× {quantity}</p>
       <strong>$ {total.toFixed(2)}</strong>
       <FaRegTrashAlt className="icon" />
     </Wrapper>
@@ -17,79 +15,75 @@ export default function Product({name, type1, isLegendary, image, price, quantit
 }
 
 const Wrapper = styled.section`
-  border: 3px solid ${props => props.theme[props.type].dark};
+  width: 100%;
+  height: 135px;
+  padding: 0 15px;
+  background: ${props => props.theme[props.type].lighter};
+  box-shadow: 5px 5px 5px ${props => props.theme[props.type].light};
   border-radius: 10px;
-  background: linear-gradient(
-    ${props => props.theme[props.type].light},
-    ${props => props.theme[props.type].lighter}
-  );
-
+  margin-top: 30px;
   display: grid;
-  grid-template-columns: 35% calc(65% - 60px) 20px;
+  grid-template-columns: 90px calc(100% - 160px) 40px;
   grid-template-areas:
-    "img title trash"
-    "img price price";
+    "img . ."
+    "img . .";
 
-  align-items: center;
+  align-items: end;
   justify-items: start;
-  gap: 20px;
-  padding: 20px 10px;
-  margin: 30px 0;
+  gap: 10px 15px;
 
-  .container {
-    grid-area: img;
-    position: relative;
-    z-index: 0;
-  }
-
-  .circle {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    border-radius: 50%;
-    padding: 10px 12px;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 16px;
-    color: ${props => props.theme.white};
-    background: ${props => props.theme[props.type].dark};
-  }
   img {
-    width: 200px;
+    border: 2px solid ${props => props.theme[props.type].dark};
+    grid-area: img;
+    align-self: center;
+    width: 90px;
+    height: 90px;
     border-radius: 10px;
   }
 
   h2 {
-    grid-area: title;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 24px;
-    color: ${props => props.theme[props.type].dark};
-    text-decoration: underline;
-  }
-
-  p {
+    width: 200px;
+    font-weight: 900;
     font-size: 20px;
     line-height: 20px;
-    color: ${props => props.theme.gray};
+    color: ${props => props.theme[props.type].dark};
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   strong {
-    grid-area: price;
+    width: fit-content;
     align-self: start;
+    height: 50px;
+    padding: 0 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.2);
+
+    border-radius: 10px;
     font-weight: 700;
     font-size: 18px;
     line-height: 18px;
-    color: ${props => props.theme[props.type].dark};
-    border: 2px solid;
-    background: ${props => props.theme.white};
-    padding: 10px;
-    border-radius: 5px;
+    background: ${props => props.theme[props.type].medium};
+    color: ${props => props.theme.black};
+  }
+
+  .amount {
+    height: fit-content;
+    justify-self: end;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    color: ${props => props.theme.gray};
   }
 
   .icon {
-    grid-area: trash;
+    align-self: start;
     justify-self: end;
+    margin-top: 12px;
     font-size: 18px;
     color: ${props => props.theme[props.type].medium};
   }

@@ -1,7 +1,8 @@
-import Page from "../commons/Page";
 import {useState} from "react";
 import Product from "../Product";
 import styled from "styled-components";
+import Header from "../commons/Header";
+import Footer from "../commons/Footer";
 
 export default function CartPage() {
   const [products, setProducts] = useState([
@@ -19,26 +20,38 @@ export default function CartPage() {
       isLegendary: false,
       image: "https://img.pokemondb.net/artwork/venusaur.jpg",
       price: 778.99,
-      quantity: 2,
+      quantity: 20,
     },
     {
       name: "Charmander",
       type1: "fire",
       isLegendary: false,
       image: "https://img.pokemondb.net/artwork/charmander.jpg",
-      price: 1231231231.0,
+      price: 31231.0,
       quantity: 3,
     },
   ]);
+
+  const type = "default";
   return (
-    <Page>
-      <Wrapper>
+    <>
+      <Header type={type} />
+      <Wrapper type={type}>
         {products.map((product, index) => (
           <Product key={index} {...product} />
         ))}
       </Wrapper>
-    </Page>
+      <Footer type={type} />
+    </>
   );
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  min-height: calc(100vh - 140px);
+  margin: 70px 0 60px;
+  padding: 20px;
+  background: linear-gradient(
+    ${props => props.theme[props.type].light},
+    ${props => props.theme[props.type].lighter}
+  );
+`;

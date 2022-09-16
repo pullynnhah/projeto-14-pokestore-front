@@ -2,113 +2,50 @@ import Header from "../commons/Header";
 import Footer from "../commons/Footer";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
-import { getPokemons } from "../../tools/UseAxios";
-import { useNavigate } from "react-router-dom";
+import {getPokemons} from "../../tools/UseAxios";
+import Pokemon from "../Pokemon";
+import Loader from "../commons/Loader";
+import PokemonBar from "../PokemonBar";
 
-export default function HomePage({children, type}) {
-  const navigate = useNavigate()
-  const [pokemons, setPokemons] = useState([]);
-  const [homeType, setHomeType] = useState(type);
-  const [typeSelections, setTypeSelections] = useState([
-    {type: "all", selected: "none"},
-    {type: "grass", selected: "none"},
-    {type: "electric", selected: "none"},
-    {type: "fire", selected: "none"},
-    {type: "water", selected: "none"},
-    {type: "normal", selected: "none"},
-    {type: "poison", selected: "none"},
-    {type: "ground", selected: "none"},
-    {type: "psychic", selected: "none"},
-    {type: "bug", selected: "none"},
-    {type: "legendary", selected: "none"},
-    {type: "others", selected: "none"},
-  ]);
-
-  function typeFinder(ty) {
-    const types = [
-      "grass",
-      "fire",
-      "water",
-      "normal",
-      "poison",
-      "electric",
-      "ground",
-      "psychic",
-      "bug",
-      "legendary",
-    ];
-    if (!types.includes(ty)) {
-      ty = "default";
-    }
-    return ty;
-  }
+export default function HomePage() {
+  const [pokemons, setPokemons] = useState(null);
+  const [type, setType] = useState("default");
 
   useEffect(() => {
-    const pokeType = {type: "all"};
-    const promisse = getPokemons(pokeType);
-    promisse.then(autorized);
-    promisse.catch(unautorized);
+    const promise = getPokemons({type: "all"});
+    promise.then(authorized);
+    promise.catch(unauthorized);
   }, []);
 
-  function selectType(index) {
-    const selectedBefore = typeSelections.find(typeSelection => typeSelection.selected === "solid");
-    if (selectedBefore !== undefined) {
-      selectedBefore.selected = "none";
-    }
-    typeSelections[index].selected = "solid";
-    setTypeSelections([...typeSelections]);
-    setHomeType(typeFinder(typeSelections[index].type));
-    const pokeType = {type: typeSelections[index].type};
-    const promisse = getPokemons(pokeType);
-    promisse.then(autorized);
-    promisse.catch(unautorized);
-  }
-
-  function autorized(response) {
+  function authorized(response) {
     setPokemons(response.data);
   }
 
-  function unautorized(error) {
+  function unauthorized(error) {
     if (error.response.data === undefined) {
-      alert("Error: unhable to connect to server");
+      alert("Error: unable to connect to server");
     } else {
       alert(error.response.data);
     }
   }
 
-  function pokemonNavigate(pokedexNumber){
-      navigate(`/pokemon/${pokedexNumber}`)
-  }
-
   return (
-    <Wrapper type={homeType}>
-      <Header type={homeType} />
-      <FilterBar type={homeType}>
-        {typeSelections.length === 0
-          ? ""
-          : typeSelections.map((typeSelection, index) => (
-              <Button
-                selected={typeSelection.selected}
-                onClick={() => {
-                  selectType(index);
-                }}
-                type={typeFinder(typeSelection.type)}>
-                {typeSelection.type.toUpperCase()}
-              </Button>
-            ))}
-      </FilterBar>
+    <Wrapper type={type}>
+      <Header type={type} />
+      <PokemonBar
+        type={type}
+        setType={setType}
+        authorized={authorized}
+        unauthorized={unauthorized}
+      />
       <Pokemons>
-        {pokemons.length === 0
-          ? ""
-          : pokemons.map(pokemon => (
-              <PokemonCard onClick={()=>{pokemonNavigate(pokemon.pokedexNumber)}} cardColor={typeFinder(pokemon.type1)}>
-                <img src={pokemon.image} />
-                <div>{pokemon.name}</div>
-                <div>${pokemon.price}</div>
-              </PokemonCard>
-            ))}
+        {!pokemons ? (
+          <Loader />
+        ) : (
+          pokemons.map(pokemon => <Pokemon key={pokemon._id} {...pokemon} />)
+        )}
       </Pokemons>
-      <Footer type={homeType} />
+      <Footer type={type} />
     </Wrapper>
   );
 }
@@ -121,74 +58,23 @@ const Wrapper = styled.div`
       ${props => props.theme[props.type].lighter}
     )
     fixed;
+
+  .fidget-wrapper {
+    position: fixed;
+    top: calc(50vh - 35px);
+    left: calc(50vw - 75px);
+  }
 `;
-const FilterBar = styled.div`
-  height: auto;
-  background: linear-gradient(
-    ${props => props.theme[props.type].dark},
-    ${props => props.theme[props.type].medium},
-    ${props => props.theme[props.type].dark}
-  );
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-x: auto;
-  padding: 20px 10px 10px 10px;
-`;
-const Button = styled.div`
-  min-width: 100px;
-  width: 100px;
-  height: 45px;
-  background: linear-gradient(
-    ${props => props.theme[props.type].light},
-    ${props => props.theme[props.type].dark},
-    ${props => props.theme[props.type].light}
-  );
-  border: 3px ${props => props.selected} ${props => props.theme[props.type].dark};
-  display: flex;
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  color: ${props => props.theme.white};
-  font-weight: 800;
-  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.5);
-`;
+
 const Pokemons = styled.div`
-  width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: start;
-  flex-wrap: wrap;
-  margin-bottom: 70px;
-  padding-bottom: 20px;
-`;
-const PokemonCard = styled.div`
-  width: 150px;
-  height: 200px;
-  display: flex;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  gap: 30px;
   justify-content: center;
-  flex-wrap: wrap;
-  cursor: pointer;
-  background: linear-gradient(
-    ${props => props.theme[props.cardColor].dark},
-    ${props => props.theme[props.cardColor].medium}
-  );
-  border-radius: 10px;
-  margin: 20px;
-  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.5);
-  img {
-    width: 120px;
-    height: 120px;
-    margin-top: 15px;
-    border-radius: 10px;
-  }
-  div {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    color: ${props => props.theme[props.cardColor].lighter};
-  }
+  justify-items: start;
+  align-items: center;
+  margin-bottom: 70px;
+  padding: 30px 20px;
 `;
