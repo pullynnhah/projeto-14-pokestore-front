@@ -11,14 +11,21 @@ import { GetUser } from "../../tools/UseAxios.js";
 
 
 function ProfilePage() {
+    // eslint-disable-next-line
     const {profile, setProfile} = useContext(GlobalContext);
     const [userName, setUserName] = useState();
+    const [userData, setUserData] = useState({});
     const navigate = useNavigate();
-    // const name = userData.name
+    let editButtonText = "Edit your profile";
+    if(!userData.adress || !userData.adressNumber || !userData.city || !userData.contact || !userData.neighborhood || !userData.zipCode){
+        editButtonText = "Complete your profile"
+    }
+
     useEffect(() => {
         const promise = GetUser(profile);
         promise.then(res => {
             setUserName(res.data.name.charAt(0).toUpperCase() + res.data.name.slice(1))
+            setUserData(res.data);
         });
     }, []);
 
@@ -31,7 +38,7 @@ function ProfilePage() {
                     <h1>hello, {userName}</h1>
                 </div>
                 <Teste onClick={() => { return (navigate("/profile/edit")) }}>
-                    <h2>Complete your profile</h2>
+                    <h2>{editButtonText}</h2>
                 </Teste>
                 <Teste onClick={() => { return (navigate("/history")) }}>
                     <h2>My history</h2>
@@ -63,7 +70,6 @@ const Container = styled.div`
         margin-top: 50px;
         font: 600 26px/28px "Nunito", sans-serif;
         color: ${props => props.theme.pokemonBlue};
-
     }
 `;
 const Teste = styled.button`

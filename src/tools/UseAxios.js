@@ -60,4 +60,17 @@ function GetUser(profile) {
   const promise = axios.get(`${process.env.REACT_APP_API_URI}/user`, config);
   return promise;
 };
-export { SignUp, Login, Logout, getPokemon, getPokemons, getHistory, GetUser };
+
+function UpdateUser(profile, body) {
+  const config = {
+    headers: {
+      "user": profile.userId,
+      "Authorization": `Bearer ${profile.token}`
+    }
+  }
+  const promise = axios.put(`${process.env.REACT_APP_API_URI}/user`, body, config);
+  return promise;
+};
+
+
+export { SignUp, Login, Logout, getPokemon, getPokemons, getHistory, GetUser, UpdateUser };
