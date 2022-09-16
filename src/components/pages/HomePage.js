@@ -2,12 +2,15 @@ import Header from "../commons/Header";
 import Footer from "../commons/Footer";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
-import { getPokemons } from "../../tools/UseAxios";
-import { useNavigate } from "react-router-dom";
+import {getPokemons} from "../../tools/UseAxios";
+import {useNavigate} from "react-router-dom";
+import Pokemon from "../Pokemon";
+import typeFinder from "../../tools/typeFinder";
+import Loader from "../commons/Loader";
 
 export default function HomePage({children, type}) {
-  const navigate = useNavigate()
-  const [pokemons, setPokemons] = useState([]);
+  const navigate = useNavigate();
+  const [pokemons, setPokemons] = useState(null);
   const [homeType, setHomeType] = useState(type);
   const [typeSelections, setTypeSelections] = useState([
     {type: "all", selected: "none"},
@@ -24,30 +27,11 @@ export default function HomePage({children, type}) {
     {type: "others", selected: "none"},
   ]);
 
-  function typeFinder(ty) {
-    const types = [
-      "grass",
-      "fire",
-      "water",
-      "normal",
-      "poison",
-      "electric",
-      "ground",
-      "psychic",
-      "bug",
-      "legendary",
-    ];
-    if (!types.includes(ty)) {
-      ty = "default";
-    }
-    return ty;
-  }
-
   useEffect(() => {
     const pokeType = {type: "all"};
-    const promisse = getPokemons(pokeType);
-    promisse.then(autorized);
-    promisse.catch(unautorized);
+    const promise = getPokemons(pokeType);
+    promise.then(autorized);
+    promise.catch(unautorized);
   }, []);
 
   function selectType(index) {
@@ -70,14 +54,10 @@ export default function HomePage({children, type}) {
 
   function unautorized(error) {
     if (error.response.data === undefined) {
-      alert("Error: unhable to connect to server");
+      alert("Error: unable to connect to server");
     } else {
       alert(error.response.data);
     }
-  }
-
-  function pokemonNavigate(pokedexNumber){
-      navigate(`/pokemon/${pokedexNumber}`)
   }
 
   return (
@@ -93,20 +73,16 @@ export default function HomePage({children, type}) {
                   selectType(index);
                 }}
                 type={typeFinder(typeSelection.type)}>
-                {typeSelection.type.toUpperCase()}
+                {typeSelection.type}
               </Button>
             ))}
       </FilterBar>
       <Pokemons>
-        {pokemons.length === 0
-          ? ""
-          : pokemons.map(pokemon => (
-              <PokemonCard onClick={()=>{pokemonNavigate(pokemon.pokedexNumber)}} cardColor={typeFinder(pokemon.type1)}>
-                <img src={pokemon.image} />
-                <div>{pokemon.name}</div>
-                <div>${pokemon.price}</div>
-              </PokemonCard>
-            ))}
+        {!pokemons ? (
+          <Loader />
+        ) : (
+          pokemons.map(pokemon => <Pokemon key={pokemon._id} {...pokemon} />)
+        )}
       </Pokemons>
       <Footer type={homeType} />
     </Wrapper>
@@ -154,7 +130,8 @@ const Button = styled.div`
   cursor: pointer;
   color: ${props => props.theme.white};
   font-weight: 800;
-  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.5);
+  text-transform: upper;
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.5);
 `;
 const Pokemons = styled.div`
   width: 100%;
@@ -164,31 +141,4 @@ const Pokemons = styled.div`
   flex-wrap: wrap;
   margin-bottom: 70px;
   padding-bottom: 20px;
-`;
-const PokemonCard = styled.div`
-  width: 150px;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  cursor: pointer;
-  background: linear-gradient(
-    ${props => props.theme[props.cardColor].dark},
-    ${props => props.theme[props.cardColor].medium}
-  );
-  border-radius: 10px;
-  margin: 20px;
-  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.5);
-  img {
-    width: 120px;
-    height: 120px;
-    margin-top: 15px;
-    border-radius: 10px;
-  }
-  div {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    color: ${props => props.theme[props.cardColor].lighter};
-  }
 `;
