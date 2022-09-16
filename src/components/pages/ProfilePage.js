@@ -1,27 +1,43 @@
-import Header from "../commons/Header";
-import Footer from "../commons/Footer";
 import styled from "styled-components";
-
 import { useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import GlobalContext from "../../tools/GlobalContext.js";
+
+
+
+import Header from "../commons/Header.js";
+import Footer from "../commons/Footer.js";
+import { GetUser } from "../../tools/UseAxios.js";
+
 
 function ProfilePage() {
+    const {profile, setProfile} = useContext(GlobalContext);
+    const [userName, setUserName] = useState();
     const navigate = useNavigate();
+    // const name = userData.name
+    useEffect(() => {
+        const promise = GetUser(profile);
+        promise.then(res => {
+            setUserName(res.data.name.charAt(0).toUpperCase() + res.data.name.slice(1))
+        });
+    }, []);
+
 
     return (
         <Wrapper>
-                <Header type={"default"} />
-                <Container>
-                    <div>
-                        <h1>Hello, Fulaninho</h1>
-                    </div>
-                    <Teste onClick={()=>{return (navigate("/profile/edit"))}}> 
-                        <h2>Complete your profile</h2>
-                    </Teste>
-                    <Teste onClick={()=>{return (navigate("/history"))}}> 
-                        <h2>My history</h2>
-                    </Teste>
-                </Container>
-                <Footer type={"default"} />
+            <Header type={"default"} />
+            <Container>
+                <div>
+                    <h1>hello, {userName}</h1>
+                </div>
+                <Teste onClick={() => { return (navigate("/profile/edit")) }}>
+                    <h2>Complete your profile</h2>
+                </Teste>
+                <Teste onClick={() => { return (navigate("/history")) }}>
+                    <h2>My history</h2>
+                </Teste>
+            </Container>
+            <Footer type={"default"} />
         </Wrapper>
     );
 }
@@ -60,6 +76,5 @@ font: 600 22px/24px "Nunito", sans-serif;
 border-radius: 5px;
 margin-top: 25px;
 `;
-
 
 export default ProfilePage;

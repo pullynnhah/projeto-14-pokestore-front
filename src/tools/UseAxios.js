@@ -50,4 +50,14 @@ function Logout(profile) {
   return promise;
 };
 
-export { SignUp, Login, getPokemon, getPokemons, getHistory, Logout };
+function GetUser(profile) {
+  const config = {
+    headers: {
+      "user": profile.userId,
+      "Authorization": `Bearer ${profile.token}`
+    }
+  }
+  const promise = axios.get(`${process.env.REACT_APP_API_URI}/user`, config);
+  return promise;
+};
+export { SignUp, Login, Logout, getPokemon, getPokemons, getHistory, GetUser };
