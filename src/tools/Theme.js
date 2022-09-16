@@ -1,22 +1,24 @@
 export const theme = {
   white: "#fafafa",
-  black: "#333",
-  gray: "#555",
+  black: "#111",
+  gray: "#444",
   pokemonRed: "#f85144",
   pokemonLightBlue: "#5ba6fd",
+  pokemonLighterBlue: "#95c6fd",
   pokemonBlue: "#063B79",
-  pokemonYellow: "#ffcb05",
+  pokemonYellow: "#ffa805",
+  pokemonLightYellow: "#fddfa6",
   grass: {
     lighter: "#c3f3cf",
     light: "#1aa73d",
     medium: "#0b872a",
     dark: "#005d18",
   },
-  fire: {
-    lighter: "#f4cac6",
-    light: "#ff6d62",
-    medium: "#f85144",
-    dark: "#de3d30",
+  default: {
+    lighter: "#fbbdbd",
+    light: "#f84c4c",
+    medium: "#f42424",
+    dark: "#e50e0e",
   },
   water: {
     lighter: "#c7edf4",
@@ -60,16 +62,23 @@ export const theme = {
     medium: "#5f760e",
     dark: "#3d4d05",
   },
-  default: {
-    lighter: "#f1e7e7",
-    light: "#f87474",
-    medium: "#f63333",
-    dark: "#d02222",
+  fire: {
+    lighter: "#fad0c5",
+    light: "#f36036",
+    medium: "#e83a09",
+    dark: "#c32b03",
   },
-  legendary:{
-    lighter:"#fff39f",
-    light:"#ecbc00",
-    medium:"#eba802",
-    dark:"#cc8801"
-  }
+  legendary: {
+    lighter: "#fff39f",
+    light: "#ecbc00",
+    medium: "#eba802",
+    dark: "#cc8801",
+  },
+
+  cart: {
+    lighter: "#c3dcff",
+    light: "#0064fa",
+    medium: "#0246ae",
+    dark: "#002258",
+  },
 };
