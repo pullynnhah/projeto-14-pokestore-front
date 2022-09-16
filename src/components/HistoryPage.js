@@ -2,7 +2,6 @@ import Page from "./Page";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { getHistory } from "../tools/UseAxios";
-import { MdHistoryEdu } from "react-icons/md";
 
 
 export default function HistoryPage({ children, type }) {

@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { getPokemons } from "../tools/UseAxios";
+import { useParams } from "react-router-dom";
 
 
 export default function HomePage({ children, type }) {
@@ -43,6 +44,7 @@ export default function HomePage({ children, type }) {
     }
 
     useEffect(() => {
+        
         const pokeType = { type: 'all' };
         const promisse = getPokemons(pokeType);
         promisse.then(autorized);
@@ -150,7 +152,7 @@ const Pokemons = styled.div`
     justify-content: start;
     flex-wrap: wrap;
     margin-bottom: 70px;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
 `
 const PokemonCard = styled.div`
     width: 150px;
