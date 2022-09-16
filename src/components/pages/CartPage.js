@@ -1,4 +1,3 @@
-import Page from "../commons/Page";
 import {useState} from "react";
 import Product from "../Product";
 import styled from "styled-components";
