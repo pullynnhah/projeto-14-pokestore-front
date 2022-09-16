@@ -3,8 +3,7 @@ import {useState} from "react";
 import {getPokemons} from "../tools/UseAxios";
 import styled from "styled-components";
 
-export default function PokemonBar({authorized, unauthorized}) {
-  const [type, setType] = useState("default");
+export default function PokemonBar({type, setType, authorized, unauthorized}) {
   const [typeSelections, setTypeSelections] = useState([
     {type: "all", selected: "none"},
     {type: "grass", selected: "none"},

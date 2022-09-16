@@ -32,7 +32,12 @@ export default function HomePage() {
   return (
     <Wrapper type={type}>
       <Header type={type} />
-      <PokemonBar type={type} authorized={authorized} unauthorized={unauthorized} />
+      <PokemonBar
+        type={type}
+        setType={setType}
+        authorized={authorized}
+        unauthorized={unauthorized}
+      />
       <Pokemons>
         {!pokemons ? (
           <Loader />
@@ -53,14 +58,23 @@ const Wrapper = styled.div`
       ${props => props.theme[props.type].lighter}
     )
     fixed;
+
+  .fidget-wrapper {
+    position: fixed;
+    top: calc(50vh - 35px);
+    left: calc(50vw - 75px);
+  }
 `;
 
 const Pokemons = styled.div`
-  width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: start;
-  flex-wrap: wrap;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  gap: 30px;
+  justify-content: center;
+  justify-items: start;
+  align-items: center;
   margin-bottom: 70px;
-  padding-bottom: 20px;
+  padding: 30px 20px;
 `;
