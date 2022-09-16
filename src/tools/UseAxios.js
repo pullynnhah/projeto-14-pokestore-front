@@ -37,6 +37,28 @@ function Logout(profile) {
   return axios.delete(`${process.env.REACT_APP_API_URI}/logout`, config);
 }
 
+function GetUser(profile) {
+  const config = {
+    headers: {
+      "user": profile.userId,
+      "Authorization": `Bearer ${profile.token}`
+    }
+  }
+  const promise = axios.get(`${process.env.REACT_APP_API_URI}/user`, config);
+  return promise;
+};
+
+function UpdateUser(profile, body) {
+  const config = {
+    headers: {
+      "user": profile.userId,
+      "Authorization": `Bearer ${profile.token}`
+    }
+  }
+  const promise = axios.put(`${process.env.REACT_APP_API_URI}/user`, body, config);
+  return promise;
+};
+
 function listCart(profile, mode) {
   const config = {
     headers: {
@@ -64,11 +86,13 @@ function checkout(profile) {
 export {
   SignUp,
   Login,
+  Logout,
   getPokemon,
   getPokemons,
   getHistory,
-  Logout,
   listCart,
   delCartItem,
   checkout,
+  GetUser, 
+  UpdateUser 
 };
