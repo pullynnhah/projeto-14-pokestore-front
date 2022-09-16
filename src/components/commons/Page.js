@@ -29,5 +29,5 @@ const Wrapper = styled.div`
     top: calc(50vh - 75px);
     left: calc(50vw - 75px);
   }
-  overflow: scroll;
+  overflow: auto;
 `;
