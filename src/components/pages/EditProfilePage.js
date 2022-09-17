@@ -50,9 +50,17 @@ function EditProfilePage() {
         };
 
         UpdateUser(profile, body)
-            .then(() => {
+            .then((res) => {
+                localStorage.setItem(
+                    "profile",
+                    JSON.stringify({
+                        token: profile.token,
+                        userId: profile.userId,
+                        userPicture: choosenPicture
+                    }))
                 SetIsDisable(false);
                 return navigate("/profile");
+
             })
             .catch(error => {
                 console.error(error);
@@ -146,7 +154,7 @@ function EditProfilePage() {
 const Wrapper = styled.div`
     width: 100vw;
     height: 100vh;
-    margin-bottom: 90px;
+    margin-bottom: 70px;
 `;
 const Container = styled.div`
     height: 100%;

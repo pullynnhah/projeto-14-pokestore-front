@@ -9,9 +9,11 @@ import { Logout } from "../../tools/UseAxios.js";
 import { useContext } from "react";
 import GlobalContext from "../../tools/GlobalContext.js";
 
-// TODO: remove this import
-import squirtle from "../../assets/images/squirtleProfile.png";
-
+import bulbasaurProfile from "../../assets/images/bulbasaurProfile.png";
+import charmanderProfile from "../../assets/images/charmanderProfile.png";
+import squirtleProfile from "../../assets/images/squirtleProfile.png";
+import pikachuProfile from "../../assets/images/pikachuProfile.png";
+import userLogo from "../../assets/images/userLogo.png";
 
 export default function Header({ type }) {
   const [clicked, setClicked] = useState(false);
@@ -20,10 +22,24 @@ export default function Header({ type }) {
   // eslint-disable-next-line
   const { profile, setProfile } = useContext(GlobalContext);
   const navigate = useNavigate();
-
+  const storage = JSON.parse(localStorage.getItem("profile"));
   function openClick() {
     setClicked(!clicked);
   }
+  let userPicture = userLogo;
+  if(storage.userPicture === 1) {
+    userPicture = bulbasaurProfile;
+  }else if(storage.userPicture === 2) {
+    userPicture = charmanderProfile;
+  }else if(storage.userPicture === 3) {
+    userPicture = squirtleProfile;
+  }else if(storage.userPicture === 4) {
+    userPicture = pikachuProfile;
+  }
+
+
+console.log(storage.userPicture);
+
 
   function logoutConfirm(props) {
     setClicked(false);
@@ -65,7 +81,7 @@ export default function Header({ type }) {
         </div>
 
         <div onClick={() => openClick()}>
-          <img src={squirtle} alt="Profile" className="profile" />
+          <img src={userPicture} alt="Profile" className="profile" />
         </div>
       </Menu>
     </Wrapper>
