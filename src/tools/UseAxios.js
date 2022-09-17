@@ -40,24 +40,22 @@ function Logout(profile) {
 function GetUser(profile) {
   const config = {
     headers: {
-      "user": profile.userId,
-      "Authorization": `Bearer ${profile.token}`
-    }
-  }
-  const promise = axios.get(`${process.env.REACT_APP_API_URI}/user`, config);
-  return promise;
-};
+      user: profile.userId,
+      Authorization: `Bearer ${profile.token}`,
+    },
+  };
+  return axios.get(`${process.env.REACT_APP_API_URI}/user`, config);
+}
 
 function UpdateUser(profile, body) {
   const config = {
     headers: {
-      "user": profile.userId,
-      "Authorization": `Bearer ${profile.token}`
-    }
-  }
-  const promise = axios.put(`${process.env.REACT_APP_API_URI}/user`, body, config);
-  return promise;
-};
+      user: profile.userId,
+      Authorization: `Bearer ${profile.token}`,
+    },
+  };
+  return axios.put(`${process.env.REACT_APP_API_URI}/user`, body, config);
+}
 
 function listCart(profile, mode) {
   const config = {
@@ -93,6 +91,6 @@ export {
   listCart,
   delCartItem,
   checkout,
-  GetUser, 
-  UpdateUser 
+  GetUser,
+  UpdateUser,
 };
