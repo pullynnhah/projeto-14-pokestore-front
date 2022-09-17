@@ -13,7 +13,7 @@ import { GetUser } from "../../tools/UseAxios.js";
 function ProfilePage() {
     // eslint-disable-next-line
     const {profile, setProfile} = useContext(GlobalContext);
-    const [userName, setUserName] = useState();
+    // const [userName, setUserName] = useState();
     const [userData, setUserData] = useState({});
     const navigate = useNavigate();
     let editButtonText = "Edit your profile";
@@ -24,18 +24,18 @@ function ProfilePage() {
     useEffect(() => {
         const promise = GetUser(profile);
         promise.then(res => {
-            setUserName(res.data.name.charAt(0).toUpperCase() + res.data.name.slice(1))
+            // setUserName(res.data.name.charAt(0).toUpperCase() + res.data.name.slice(1))
             setUserData(res.data);
         });
     }, []);
 
-
+console.log("profile")
     return (
         <Wrapper>
             <Header type={"default"} />
             <Container>
                 <div>
-                    <h1>hello, {userName}</h1>
+                    <h1>hello, {userData.name? userData.name.charAt(0).toUpperCase() + userData.name.slice(1) : "Jhon Doe"}</h1>
                 </div>
                 <Teste onClick={() => { return (navigate("/profile/edit")) }}>
                     <h2>{editButtonText}</h2>
