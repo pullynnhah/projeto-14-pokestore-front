@@ -22,7 +22,7 @@ function getPokemon(pokedexNumber) {
 function getHistory(body) {
   const config = {
     headers: {
-      userid: body,
+      user: body,
     },
   };
   return axios.get(`${process.env.REACT_APP_API_URI}/history`, config);
@@ -64,10 +64,10 @@ function listCart(profile, mode) {
     headers: {
       user: profile.userId,
     },
-    params: {mode},
-  };
-
-  return axios.get(`${process.env.REACT_APP_API_URI}/cart`, config);
+    
+  }
+  const params = {mode:mode}
+  return axios.get(`${process.env.REACT_APP_API_URI}/cart/?mode=${params.mode}`, config);
 }
 
 function delCartItem(profile) {
