@@ -27,7 +27,7 @@ function ProfilePage() {
             // setUserName(res.data.name.charAt(0).toUpperCase() + res.data.name.slice(1))
             setUserData(res.data);
         });
-    }, []);
+    }, [profile]);
 
 console.log("profile")
     return (
@@ -37,12 +37,12 @@ console.log("profile")
                 <div>
                     <h1>hello, {userData.name? userData.name.charAt(0).toUpperCase() + userData.name.slice(1) : "Jhon Doe"}</h1>
                 </div>
-                <Teste onClick={() => { return (navigate("/profile/edit")) }}>
+                <Box onClick={() => { return (navigate("/profile/edit")) }}>
                     <h2>{editButtonText}</h2>
-                </Teste>
-                <Teste onClick={() => { return (navigate("/history")) }}>
+                </Box>
+                <Box onClick={() => { return (navigate("/history")) }}>
                     <h2>My history</h2>
-                </Teste>
+                </Box>
             </Container>
             <Footer type={"default"} />
         </Wrapper>
@@ -67,13 +67,13 @@ const Container = styled.div`
       ${props => props.theme.default.lighter}
     );
     h1{
-        margin-top: 50px;
+        margin-top: 75px;
         font: 600 26px/28px "Nunito", sans-serif;
         color: ${props => props.theme.pokemonBlue};
     }
 `;
-const Teste = styled.button`
-width: 250px;
+const Box = styled.button`
+width: 80vw;
 height: 50px;
 background-color: ${props => props.theme.default.medium};
 color: ${props => props.theme.white};
