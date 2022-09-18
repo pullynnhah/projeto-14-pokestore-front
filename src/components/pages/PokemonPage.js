@@ -26,11 +26,7 @@ export default function PokemonPage() {
   }, [pokedexNum]);
 
   if (!pokemon) {
-    return (
-      <Page>
-        <Loader />
-      </Page>
-    );
+    return <Loader />;
   }
 
   const {classfication, name, type1, type2, isLegendary, price, image} = pokemon;
