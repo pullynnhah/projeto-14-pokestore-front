@@ -9,14 +9,20 @@ import LoadSpinners from "../assets/styles/LoadSpinners";
 export default function AddCartButton({type, quantity, pokedexNumber}) {
   const [isLoading, setIsLoading] = useState(false);
   const {profile} = useContext(GlobalContext);
+  const storage = JSON.parse(localStorage.getItem("profile"))
   const navigate = useNavigate();
+  
   async function addToCart() {
     try {
+      if(storage === null) {
+        alert("To add items to your cart, please, Log-in.")
+        return navigate("/login");
+      }
       setIsLoading(true);
       await addCartItem(quantity, pokedexNumber, profile);
       setIsLoading(false);
       alert("Adicionado no carrinho com sucesso!");
-      navigate("/cart");
+      navigate(-1);
     } catch (e) {
       console.log(e.message);
     }

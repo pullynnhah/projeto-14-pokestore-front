@@ -66,7 +66,7 @@ function SignUpPage() {
           </Registbutton>
         </RegistrationForm>
 
-        <Link to={`/`}>
+        <Link to={"/login"}>
           <New>Take me to login page!</New>
         </Link>
       </Container>

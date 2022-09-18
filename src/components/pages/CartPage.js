@@ -6,10 +6,13 @@ import Footer from "../commons/Footer";
 import GlobalContext from "../../tools/GlobalContext";
 import Loader from "../commons/Loader";
 import {checkoutCart, delCartItem, listCart} from "../../tools/UseAxios";
+import {useNavigate} from "react-router-dom";
 
 export default function CartPage() {
   const [products, setProducts] = useState(null);
   const {profile} = useContext(GlobalContext);
+  const navigate = useNavigate();
+  const storage = JSON.parse(localStorage.getItem("profile"))
 
   async function getCart() {
     const {data} = await listCart(profile, "cart");
@@ -22,6 +25,9 @@ export default function CartPage() {
   }
 
   useEffect(() => {
+    if(storage === null) {
+      return navigate("/login");
+    }
     getCart();
   }, []);
 
