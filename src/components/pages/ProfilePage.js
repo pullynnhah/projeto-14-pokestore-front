@@ -12,16 +12,16 @@ function ProfilePage() {
   // eslint-disable-next-line
   const {profile} = useContext(GlobalContext);
   // const [userName, setUserName] = useState();
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   let editButtonText = "Edit your profile";
   if (
-    !userData.adress ||
-    !userData.adressNumber ||
-    !userData.city ||
-    !userData.contact ||
-    !userData.neighborhood ||
-    !userData.zipCode
+    !userData?.adress ||
+    !userData?.adressNumber ||
+    !userData?.city ||
+    !userData?.contact ||
+    !userData?.neighborhood ||
+    !userData?.zipCode
   ) {
     editButtonText = "Complete your profile";
   }
@@ -90,6 +90,7 @@ const Container = styled.div`
     ${props => props.theme.default.light},
     ${props => props.theme.default.lighter}
   );
+
   h1 {
     margin-top: 75px;
     font: 600 26px/28px "Nunito", sans-serif;
