@@ -35,6 +35,7 @@ export default function CartPage() {
     try {
       await checkoutCart(profile);
       await getCart();
+      navigate('/');
     } catch (e) {
       console.log(e.message);
     }

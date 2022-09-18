@@ -1,86 +1,96 @@
 import styled from "styled-components";
-import {useContext, useEffect, useState} from "react";
-import {listCart} from "../../tools/UseAxios";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { listCart } from "../../tools/UseAxios";
 import GlobalContext from "../../tools/GlobalContext";
 import Header from "../commons/Header";
 import Footer from "../commons/Footer";
 import Loader from "../commons/Loader";
 
-export default function HistoryPage({type}) {
-  const [history, setHistory] = useState(null);
+export default function HistoryPage({ type }) {
+    const [history, setHistory] = useState(null);
+    const navigate = useNavigate();
+    const { profile } = useContext(GlobalContext);
 
-  const {profile} = useContext(GlobalContext);
+    useEffect(() => {
+        const promisse = listCart(profile, "history");
+        promisse.then(authorized);
+        promisse.catch(unauthorized);
+    }, []);
 
-  useEffect(() => {
-    const promisse = listCart(profile, "history");
-    promisse.then(authorized);
-    promisse.catch(unauthorized);
-  }, []);
-
-  function authorized(response) {
-    const data = response.data;
-    data.forEach(datum => {
-      const images = [];
-      for (let i = 0; i < datum.quantity; i++) {
-        images.push(datum.image);
-      }
-      data.images = images;
-    });
-    setHistory(data);
-  }
-
-  function unauthorized(error) {
-    if (error.response.data === undefined) {
-      alert("Error: unhable to connect to server");
-    } else {
-      alert(error.response.data);
+    function authorized(response) {
+        const data = response.data;
+        data.forEach(datum => {
+            const images = [];
+            for (let i = 0; i < datum.quantity; i++) {
+                images.push(datum.image);
+            }
+            data.images = images;
+        });
+        setHistory(data);
     }
-  }
 
-  if (!history) {
+    function unauthorized(error) {
+        if (error.response.data === undefined) {
+            alert("Error: unhable to connect to server");
+        } else {
+            alert(error.response.data);
+        }
+    }
+
+    function navigateHome(){
+        navigate('/');
+    }
+
+    if (!history) {
+        return (
+            <>
+                <Header type={type} />
+                <Loader type={type} />
+                <Footer type={type} />
+            </>
+        );
+    }
+
     return (
-      <>
-        <Header type={type} />
-        <Loader type={type} />
-        <Footer type={type} />
-      </>
+        <>
+            <Header type={type} />
+            <Wrapper type={type}>
+                History of user:
+                <HistoryContainer>
+                    {history.length == 0 ?
+                            <div>
+                                You dont have any purchase yet, start buying:   
+                                <HomeNavigate onClick={navigateHome}>here</HomeNavigate>
+                            </div>
+                        : history.map(({ cartId, purchaseDate, deliveryDate, name, quantity, price, images }) => (
+                            <PurchaseHistory type={type}>
+                                <p>ID: {cartId}</p>
+                                <p>Purchase Date: {purchaseDate}</p>
+                                <p>Delivery Date: {deliveryDate}</p>
+                                <p>Pokemon: {name}</p>
+                                <p>Quantity: {quantity}</p>
+                                <p>Unit price: $ {price}.toFixed(2)</p>
+                                <p>Total price: $ {(quantity * price).toFixed(2)}</p>
+                                {
+                                    <div>
+                                        {images.map(img => (
+                                            <img src={img} alt={name} />
+                                        ))}{" "}
+                                    </div>
+                                }
+                            </PurchaseHistory>
+                        ))}
+                </HistoryContainer>
+            </Wrapper>
+            <Footer type={type} />
+        </>
     );
-  }
-
-  return (
-    <>
-      <Header type={type} />
-      <Wrapper type={type}>
-        History of user:
-        <HistoryContainer>
-          {history.map(({cartId, purchaseDate, deliveryDate, name, quantity, price, images}) => (
-            <PurchaseHistory type={type}>
-              <p>ID: {cartId}</p>
-              <p>Purchase Date: {purchaseDate}</p>
-              <p>Delivery Date: {deliveryDate}</p>
-              <p>Pokemon: {name}</p>
-              <p>Quantity: {quantity}</p>
-              <p>Unit price: $ {price}.toFixed(2)</p>
-              <p>Total price: $ {(quantity * price).toFixed(2)}</p>
-              {
-                <div>
-                  {images.map(img => (
-                    <img src={img} alt={name} />
-                  ))}{" "}
-                </div>
-              }
-            </PurchaseHistory>
-          ))}
-        </HistoryContainer>
-      </Wrapper>
-      <Footer type={type} />
-    </>
-  );
 }
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   color: ${props => props.theme.pokemonBlue};
   font-size: 30px;
   font-weight: 800;
@@ -89,6 +99,9 @@ const Wrapper = styled.div`
     ${props => props.theme[props.type].lighter}
   );
 `;
+const HomeNavigate = styled.span`
+    text-decoration: underline;
+`
 const HistoryContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -96,6 +109,13 @@ const HistoryContainer = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 25px;
+  >div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 `;
 
 const PurchaseHistory = styled.div`
@@ -130,7 +150,6 @@ const PurchaseHistory = styled.div`
     overflow: auto;
     padding: 3px;
   }
-
   img {
     width: 60px;
     border-radius: 10px;
