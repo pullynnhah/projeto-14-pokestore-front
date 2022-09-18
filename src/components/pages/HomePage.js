@@ -29,6 +29,10 @@ export default function HomePage() {
     }
   }
 
+  if (!pokemons) {
+    return <Loader />;
+  }
+
   return (
     <Wrapper type={type}>
       <Header type={type} />
@@ -39,11 +43,9 @@ export default function HomePage() {
         unauthorized={unauthorized}
       />
       <Pokemons>
-        {!pokemons ? (
-          <Loader />
-        ) : (
-          pokemons.map(pokemon => <Pokemon key={pokemon._id} {...pokemon} />)
-        )}
+        {pokemons.map(pokemon => (
+          <Pokemon key={pokemon._id} {...pokemon} />
+        ))}
       </Pokemons>
       <Footer type={type} />
     </Wrapper>

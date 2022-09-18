@@ -5,6 +5,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 export default function Footer({type}) {
   const loc = useLocation();
   const navigate = useNavigate();
+
   return (
     <Wrapper type={type}>
       <Icon isActive={loc.pathname === "/"} onClick={() => navigate("/")}>

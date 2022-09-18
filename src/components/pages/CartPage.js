@@ -37,13 +37,7 @@ export default function CartPage() {
   const type = "default";
 
   if (!products) {
-    return (
-      <>
-        <Header type={type} />
-        <Loader type={type} />
-        <Footer type={type} />
-      </>
-    );
+    return <Loader type={type} />;
   }
   return (
     <>

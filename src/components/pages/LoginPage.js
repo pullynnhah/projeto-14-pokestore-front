@@ -29,7 +29,7 @@ function LoginPage() {
 
         await localStorage.setItem("profile", JSON.stringify(data));
         setProfile(data);
-        return navigate("/home");
+        return navigate("/");
       })
       .catch(error => {
         console.error(error);

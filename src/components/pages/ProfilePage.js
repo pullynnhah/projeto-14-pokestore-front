@@ -34,13 +34,7 @@ function ProfilePage() {
   }, [profile]);
 
   if (!userData) {
-    return (
-      <>
-        <Header type="default" />
-        <Loader />
-        <Footer type="default" />
-      </>
-    );
+    return <Loader type="default" />;
   }
 
   return (
