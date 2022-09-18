@@ -12,6 +12,7 @@ import PokemonPage from "./components/pages/PokemonPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import CartPage from "./components/pages/CartPage";
 import EditProfilePage from "./components/pages/EditProfilePage.js";
+import NotFoundPage from "./components/pages/NotFoundPage";
 
 export default function App() {
   const [profile, setProfile] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -22,14 +23,15 @@ export default function App() {
       <GlobalContext.Provider value={{profile, setProfile}}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<HomePage type={"default"} />} />;
-            <Route path="/login" element={<LoginPage />} />;
-            <Route path="/signup" element={<SignUpPage />} />;
-            <Route path="/pokemon/:pokedexNumber" element={<PokemonPage />} />;
-            <Route path="/history" element={<HistoryPage type="default" />} />;
+            <Route path="/" element={<HomePage type={"default"} />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/pokemon/:pokedexNumber" element={<PokemonPage />} />
+            <Route path="/history" element={<HistoryPage type="default" />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path="/profile" element={<ProfilePage />} />;
-            <Route path="/profile/edit" element={<EditProfilePage />} />;
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/edit" element={<EditProfilePage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
