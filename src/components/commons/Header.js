@@ -23,6 +23,7 @@ export default function Header({type}) {
   const {profile} = useContext(GlobalContext);
   const navigate = useNavigate();
   const storage = JSON.parse(localStorage.getItem("profile")) ?? {userPicture: 0};
+  const logged = JSON.parse(localStorage.getItem("profile"));
   function openClick() {
     setClicked(!clicked);
   }
@@ -30,6 +31,9 @@ export default function Header({type}) {
   const userPicture = profiles[storage.userPicture];
 
   function logoutConfirm(props) {
+    if(logged === null) {
+      return navigate("/login");
+    }
     setClicked(false);
     if (props) {
       logout(profile)

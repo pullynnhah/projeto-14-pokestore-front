@@ -14,8 +14,6 @@ function ProfilePage() {
   // const [userName, setUserName] = useState();
   const [userData, setUserData] = useState(null);
   const storage = JSON.parse(localStorage.getItem("profile"))
-  console.log(storage)
-  
   const navigate = useNavigate();
   let editButtonText = "Edit your profile";
   if (
