@@ -1,7 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {useState} from "react";
-import {SignUp} from "../../tools/UseAxios.js";
+import {signUp} from "../../tools/UseAxios.js";
 import logo from "../../assets/images/logo.png";
 import LoadSpinners from "../../assets/styles/LoadSpinners.js";
 
@@ -19,7 +19,7 @@ function SignUpPage() {
         email: e.target[1].value,
         password: e.target[2].value,
       };
-      SignUp(body)
+      signUp(body)
         .then(() => {
           return navigate("/");
         })

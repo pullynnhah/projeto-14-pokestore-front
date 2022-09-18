@@ -1,19 +1,20 @@
 import styled from "styled-components";
 import {BsFillPersonFill, BsHouseFill, FaShoppingCart} from "react-icons/all";
+import {useLocation, useNavigate} from "react-router-dom";
 
 export default function Footer({type}) {
-  // TODO: based on the route decide which Icon will be active
+  const loc = useLocation();
+  const navigate = useNavigate();
   return (
     <Wrapper type={type}>
-      <Icon>
+      <Icon isActive={loc.pathname === "/"} onClick={() => navigate("/")}>
         <BsHouseFill className="icon" />
       </Icon>
 
-      {/*TODO: depends on the page that is active*/}
-      <Icon isActive>
+      <Icon isActive={loc.pathname === "/cart"} onClick={() => navigate("/cart")}>
         <FaShoppingCart className="icon" />
       </Icon>
-      <Icon>
+      <Icon isActive={loc.pathname === "/profile"} onClick={() => navigate("/profile")}>
         <BsFillPersonFill className="icon" />
       </Icon>
     </Wrapper>

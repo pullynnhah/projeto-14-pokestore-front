@@ -1,45 +1,65 @@
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Product from "../Product";
 import styled from "styled-components";
 import Header from "../commons/Header";
 import Footer from "../commons/Footer";
+import GlobalContext from "../../tools/GlobalContext";
+import Loader from "../commons/Loader";
+import {checkoutCart, delCartItem, listCart} from "../../tools/UseAxios";
 
 export default function CartPage() {
-  const [products, setProducts] = useState([
-    {
-      name: "Ivysaur",
-      type1: "grass",
-      isLegendary: false,
-      image: "https://img.pokemondb.net/artwork/ivysaur.jpg",
-      price: 562.57,
-      quantity: 1,
-    },
-    {
-      name: "Venusaur",
-      type1: "electric",
-      isLegendary: false,
-      image: "https://img.pokemondb.net/artwork/venusaur.jpg",
-      price: 778.99,
-      quantity: 20,
-    },
-    {
-      name: "Charmander",
-      type1: "fire",
-      isLegendary: false,
-      image: "https://img.pokemondb.net/artwork/charmander.jpg",
-      price: 31231.0,
-      quantity: 3,
-    },
-  ]);
+  const [products, setProducts] = useState(null);
+  const {profile} = useContext(GlobalContext);
+
+  async function getCart() {
+    const {data} = await listCart(profile, "cart");
+    setProducts(data);
+  }
+
+  async function delItem(cartId) {
+    await delCartItem(cartId, profile);
+    await getCart();
+  }
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
+  async function checkout() {
+    try {
+      await checkoutCart(profile);
+      await getCart();
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
 
   const type = "default";
+
+  if (!products) {
+    return (
+      <>
+        <Header type={type} />
+        <Loader type={type} />
+        <Footer type={type} />
+      </>
+    );
+  }
   return (
     <>
       <Header type={type} />
       <Wrapper type={type}>
         {products.map((product, index) => (
-          <Product key={index} {...product} />
+          <Product key={index} {...product} del={delItem} />
         ))}
+        <div className="price">
+          <p>Total:</p>
+          <h2>
+            ${" "}
+            {products.reduce((ac, product) => ac + product.price * product.quantity, 0).toFixed(2)}
+          </h2>
+        </div>
+        <button onClick={checkout}>Checkout</button>
       </Wrapper>
       <Footer type={type} />
     </>
@@ -54,4 +74,40 @@ const Wrapper = styled.div`
     ${props => props.theme[props.type].light},
     ${props => props.theme[props.type].lighter}
   );
+
+  .price {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px auto;
+
+    p {
+      font-size: 28px;
+      line-height: 28px;
+      color: ${props => props.theme.pokemonBlue};
+    }
+
+    h2 {
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 32px;
+      color: ${props => props.theme.pokemonBlue};
+    }
+  }
+
+  button {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    height: 60px;
+    background: ${props => props.theme.pokemonBlue};
+    color: ${props => props.theme.pokemonYellow};
+    font-weight: 900;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    border-radius: 10px;
+  }
 `;

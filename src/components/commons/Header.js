@@ -5,7 +5,7 @@ import {IoSettings, IoLogOut} from "react-icons/io5";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import LoadSpinners from "../../assets/styles/LoadSpinners.js";
-import {Logout} from "../../tools/UseAxios.js";
+import {logout} from "../../tools/UseAxios.js";
 import {useContext} from "react";
 import GlobalContext from "../../tools/GlobalContext.js";
 
@@ -26,21 +26,13 @@ export default function Header({type}) {
   function openClick() {
     setClicked(!clicked);
   }
-  const profiles = [
-    userLogo,
-    bulbasaurProfile,
-    charmanderProfile,
-    squirtleProfile,
-    squirtleProfile,
-    pikachuProfile,
-  ];
-
+  const profiles = [userLogo, bulbasaurProfile, charmanderProfile, squirtleProfile, pikachuProfile];
   const userPicture = profiles[storage.userPicture];
 
   function logoutConfirm(props) {
     setClicked(false);
     if (props) {
-      Logout(profile)
+      logout(profile)
         .then(async res => {
           await localStorage.clear();
           setIsDisable(!isDisable);
@@ -61,12 +53,9 @@ export default function Header({type}) {
   return (
     <Wrapper type={type}>
       <img src={logo} alt="Pokéstore logo" className="logo" />
-      <FaShoppingCart className="icon" />
+      <FaShoppingCart className="icon" onClick={() => navigate("/cart")} />
       <Menu clicked={clicked} type={type}>
-        <div
-          onClick={() => {
-            return navigate("/profile");
-          }}>
+        <div onClick={() => navigate("/profile")}>
           <IoSettings className="icon" />
         </div>
 

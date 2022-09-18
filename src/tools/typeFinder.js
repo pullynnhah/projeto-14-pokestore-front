@@ -1,4 +1,4 @@
-export default function typeFinder(type) {
+export default function typeFinder(type, removeNull = true) {
   const types = [
     "grass",
     "fire",
@@ -9,9 +9,10 @@ export default function typeFinder(type) {
     "ground",
     "psychic",
     "bug",
+    "legendary",
   ];
 
-  if (!types.includes(type)) {
+  if (removeNull && !types.includes(type)) {
     type = "default";
   }
   return type;
