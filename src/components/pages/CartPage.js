@@ -5,18 +5,20 @@ import Header from "../commons/Header";
 import Footer from "../commons/Footer";
 import GlobalContext from "../../tools/GlobalContext";
 import Loader from "../commons/Loader";
-import {checkoutCart, listCart} from "../../tools/UseAxios";
+import {checkoutCart, delCartItem, listCart} from "../../tools/UseAxios";
 
 export default function CartPage() {
   const [products, setProducts] = useState(null);
   const {profile} = useContext(GlobalContext);
 
-  function getCart() {
-    const promise = listCart(profile, "cart");
-    promise.then(response => {
-      setProducts(response.data);
-      console.log(response.data);
-    });
+  async function getCart() {
+    const {data} = await listCart(profile, "cart");
+    setProducts(data);
+  }
+
+  async function delItem(cartId) {
+    await delCartItem(cartId, profile);
+    await getCart();
   }
 
   useEffect(() => {
@@ -26,18 +28,19 @@ export default function CartPage() {
   async function checkout() {
     try {
       await checkoutCart(profile);
-      getCart();
+      await getCart();
     } catch (e) {
       console.log(e.message);
     }
   }
+
   const type = "default";
 
   if (!products) {
     return (
       <>
         <Header type={type} />
-        <Loader />
+        <Loader type={type} />
         <Footer type={type} />
       </>
     );
@@ -47,7 +50,7 @@ export default function CartPage() {
       <Header type={type} />
       <Wrapper type={type}>
         {products.map((product, index) => (
-          <Product key={index} {...product} />
+          <Product key={index} {...product} del={delItem} />
         ))}
         <div className="price">
           <p>Total:</p>
