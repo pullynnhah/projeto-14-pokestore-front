@@ -13,6 +13,9 @@ function ProfilePage() {
   const {profile} = useContext(GlobalContext);
   // const [userName, setUserName] = useState();
   const [userData, setUserData] = useState(null);
+  const storage = JSON.parse(localStorage.getItem("profile"))
+  console.log(storage)
+  
   const navigate = useNavigate();
   let editButtonText = "Edit your profile";
   if (
@@ -27,6 +30,9 @@ function ProfilePage() {
   }
 
   useEffect(() => {
+  if(storage === null) {
+    return navigate("/login");
+  }
     const promise = getUser(profile);
     promise.then(res => {
       setUserData(res.data);

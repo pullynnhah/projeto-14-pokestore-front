@@ -37,14 +37,13 @@ export default function Header({type}) {
           await localStorage.clear();
           setIsDisable(!isDisable);
           setOutClick(!outClick);
-          return navigate("/");
+          return navigate("/login");
         })
         .catch(error => {
           console.error(error);
-          alert(`${error.response.data}`);
           setOutClick(!outClick);
           setIsDisable(false);
-          return navigate("/");
+          return navigate("/login");
         });
     } else {
       setOutClick(!outClick);
