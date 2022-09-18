@@ -36,7 +36,10 @@ export default function PokemonPage() {
   // TODO: add display for types and legendary pokémon
   const {classfication, name, type1, type2, isLegendary, price, image} = pokemon;
   const type = typeFinder(type1);
-  const types = [typeFinder(type1), typeFinder(type2)];
+  const types = [
+    {name: typeFinder(type1, false), color: typeFinder(type1)},
+    {name: typeFinder(type2, false), color: typeFinder(type2)},
+  ];
 
   return (
     <Page type={type}>
