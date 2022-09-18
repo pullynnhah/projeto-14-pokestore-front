@@ -1,15 +1,18 @@
 import styled from "styled-components";
 import {FaRegTrashAlt} from "react-icons/fa";
+import typeFinder from "../tools/typeFinder";
 
-export default function Product({name, type1, isLegendary, image, price, quantity}) {
-  const total = price * quantity;
+export default function Product({cartId, name, type, isLegendary, image, price, quantity}) {
+  const totalPrice = price * quantity;
+  type = isLegendary ? "legendary" : typeFinder(type, false);
+  function remove() {}
   return (
-    <Wrapper type={type1}>
+    <Wrapper type={type}>
       <img src={image} alt={name} />
       <h2>{name}</h2>
       <p className="amount">× {quantity}</p>
-      <strong>$ {total.toFixed(2)}</strong>
-      <FaRegTrashAlt className="icon" />
+      <strong>$ {totalPrice.toFixed(2)}</strong>
+      <FaRegTrashAlt className="icon" onClick={remove} />
     </Wrapper>
   );
 }

@@ -72,7 +72,7 @@ function delCartItem(profile) {
   return axios.post(`${process.env.REACT_APP_API_URI}/cart/${profile.userId}`);
 }
 
-function checkout(profile) {
+function checkoutCart(profile) {
   const config = {
     headers: {
       user: profile.userId,
@@ -100,7 +100,7 @@ export {
   getHistory,
   listCart,
   delCartItem,
-  checkout,
+  checkoutCart,
   GetUser,
   UpdateUser,
   addCartItem,
