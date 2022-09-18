@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
-import { FaShoppingCart } from "react-icons/fa";
-import { IoSettings, IoLogOut } from "react-icons/io5";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {FaShoppingCart} from "react-icons/fa";
+import {IoSettings, IoLogOut} from "react-icons/io5";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import LoadSpinners from "../../assets/styles/LoadSpinners.js";
-import { Logout } from "../../tools/UseAxios.js";
-import { useContext } from "react";
+import {Logout} from "../../tools/UseAxios.js";
+import {useContext} from "react";
 import GlobalContext from "../../tools/GlobalContext.js";
 
 import bulbasaurProfile from "../../assets/images/bulbasaurProfile.png";
@@ -15,47 +15,45 @@ import squirtleProfile from "../../assets/images/squirtleProfile.png";
 import pikachuProfile from "../../assets/images/pikachuProfile.png";
 import userLogo from "../../assets/images/userLogo.png";
 
-export default function Header({ type }) {
+export default function Header({type}) {
   const [clicked, setClicked] = useState(false);
   const [outClick, setOutClick] = useState(false);
   const [isDisable, setIsDisable] = useState(false);
   // eslint-disable-next-line
-  const { profile, setProfile } = useContext(GlobalContext);
+  const {profile} = useContext(GlobalContext);
   const navigate = useNavigate();
-  const storage = JSON.parse(localStorage.getItem("profile"));
+  const storage = JSON.parse(localStorage.getItem("profile")) ?? {userPicture: 0};
   function openClick() {
     setClicked(!clicked);
   }
-  let userPicture = userLogo;
-  if(storage.userPicture === 1) {
-    userPicture = bulbasaurProfile;
-  }else if(storage.userPicture === 2) {
-    userPicture = charmanderProfile;
-  }else if(storage.userPicture === 3) {
-    userPicture = squirtleProfile;
-  }else if(storage.userPicture === 4) {
-    userPicture = pikachuProfile;
-  }
+  const profiles = [
+    userLogo,
+    bulbasaurProfile,
+    charmanderProfile,
+    squirtleProfile,
+    squirtleProfile,
+    pikachuProfile,
+  ];
 
-
-console.log(storage.userPicture);
-
+  const userPicture = profiles[storage.userPicture];
 
   function logoutConfirm(props) {
     setClicked(false);
     if (props) {
-      Logout(profile).then(async (res) => {
-        await localStorage.clear();
-        setIsDisable(!isDisable)
-        setOutClick(!outClick);
-        return (navigate("/"));
-      }).catch((error) => {
-        console.error(error);
-        alert(`${error.response.data}`);
-        setOutClick(!outClick);
-        setIsDisable(false);
-        return (navigate("/"));
-      });
+      Logout(profile)
+        .then(async res => {
+          await localStorage.clear();
+          setIsDisable(!isDisable);
+          setOutClick(!outClick);
+          return navigate("/");
+        })
+        .catch(error => {
+          console.error(error);
+          alert(`${error.response.data}`);
+          setOutClick(!outClick);
+          setIsDisable(false);
+          return navigate("/");
+        });
     } else {
       setOutClick(!outClick);
     }
@@ -64,8 +62,11 @@ console.log(storage.userPicture);
     <Wrapper type={type}>
       <img src={logo} alt="Pokéstore logo" className="logo" />
       <FaShoppingCart className="icon" />
-      <Menu clicked={clicked} type={type} >
-        <div onClick={()=>{return (navigate("/profile"));}}>
+      <Menu clicked={clicked} type={type}>
+        <div
+          onClick={() => {
+            return navigate("/profile");
+          }}>
           <IoSettings className="icon" />
         </div>
 
@@ -74,8 +75,12 @@ console.log(storage.userPicture);
           <Confirmation type={type} clicked={outClick}>
             <h1>are you sure you want to logout?</h1>
             <ButtomBox>
-              <LogoutButton type={type} onClick={() => logoutConfirm(outClick)}>{<LoadSpinners isDisable={isDisable}>Yes, logout!</LoadSpinners>}</LogoutButton>
-              <LogoutButton type={type} onClick={() => logoutConfirm()}>Cancel</LogoutButton>
+              <LogoutButton type={type} onClick={() => logoutConfirm(outClick)}>
+                {<LoadSpinners isDisable={isDisable}>Yes, logout!</LoadSpinners>}
+              </LogoutButton>
+              <LogoutButton type={type} onClick={() => logoutConfirm()}>
+                Cancel
+              </LogoutButton>
             </ButtomBox>
           </Confirmation>
         </div>
@@ -121,7 +126,7 @@ const Wrapper = styled.header`
 `;
 
 const Menu = styled.div`
-  height:  ${props => props.clicked ? "370%" : "98%"};
+  height: ${props => (props.clicked ? "370%" : "98%")};
   width: 60px;
   display: flex;
   flex-direction: column;
@@ -130,10 +135,11 @@ const Menu = styled.div`
   overflow: hidden;
   transition: height 0.5s;
   border-radius: 0 0 10px 10px;
-  border: ${props => props.clicked ? "370%" : "70%"};
-  background-color: ${props => props.clicked ? props.theme[props.type].medium : props.theme[props.type].light};
+  border: ${props => (props.clicked ? "370%" : "70%")};
+  background-color: ${props =>
+    props.clicked ? props.theme[props.type].medium : props.theme[props.type].light};
   padding: 10px;
-  div{
+  div {
     margin-top: 4px;
   }
 `;
@@ -145,7 +151,7 @@ const Confirmation = styled.div`
   transform: translate(-50%, 0);
   bottom: 50%;
   transform: bottom(-50%, 0);
-  display: ${props => props.clicked ? "flex" : "none"};
+  display: ${props => (props.clicked ? "flex" : "none")};
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -153,8 +159,8 @@ const Confirmation = styled.div`
   border: solid 1px ${props => props.theme[props.type].medium};
   border-radius: 5px;
   padding: 24px;
-  h1{
-    font: 600 24px/28px 'Nunito', sans-serif;
+  h1 {
+    font: 600 24px/28px "Nunito", sans-serif;
     color: ${props => props.theme[props.type].dark};
     text-align: center;
   }
@@ -165,7 +171,7 @@ const LogoutButton = styled.button`
   width: 25vw;
   border-radius: 5px;
   text-align: center;
-  font: 400 16px/25px 'Nunito', sans-serif;
+  font: 400 16px/25px "Nunito", sans-serif;
   color: ${props => props.theme.white};
   padding: 5px;
   display: flex;
@@ -174,6 +180,6 @@ const LogoutButton = styled.button`
 `;
 const ButtomBox = styled.div`
   width: 100%;
-  display:flex;
+  display: flex;
   justify-content: space-between;
 `;
