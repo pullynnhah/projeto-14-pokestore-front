@@ -1,21 +1,29 @@
 import Page from "../commons/Page.js";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { getHistory } from "../../tools/UseAxios";
+import { getHistory, listCart } from "../../tools/UseAxios";
 
 
 export default function HistoryPage({ children, type }) {
 
     const [history, setHistory] = useState([]);
 
+
     useEffect(() => {
-        const userId = '3';
-        const promisse = getHistory(userId);
+        const user = {userId:"63229691a2e99a22734583bd"}; //modificar para user logado
+        const promisse = listCart(user,"history");
         promisse.then(autorized);
         promisse.catch(unautorized);
     }, [])
 
     function autorized(response) {
+        const data = response.data;
+        for(let i=0;i<data.length;i++){
+            data[i].imgLength = [];
+            for(let j=0;j<data[i].quantity;j++){
+                data[i].imgLength.push(data[i].image);
+            }
+        }
         setHistory(response.data);
         console.log(response.data)
     }
@@ -35,12 +43,17 @@ export default function HistoryPage({ children, type }) {
                 History of user:
                 <HistoryContainer>
                     {history.length === 0 ? '' : history.map(hist => 
-                    <PurchaseHistory type={'water'}>
-                        <div>Purchase ID: {hist._id}</div>
+                    <PurchaseHistory type={hist.type}>
+                        <div>ID: {hist.cartId}</div>
                         <div>Purchase Date: {hist.purchaseDate}</div>
                         <div>Delivery Date: {hist.deliveryDate}</div>
-                        <div>Pokemon ID: {hist.pokemonId}</div>
+                        <div>Pokemon: {hist.name}</div>
                         <div>Quantity: {hist.quantity}</div>
+                        <div>Total price: ${(hist.quantity*hist.price).toFixed(2)}</div>
+                        {
+                            <div>{hist.imgLength.map((img) => (<img src={img}/>))} </div>
+                        }
+                       
                     </PurchaseHistory> )}
                 </HistoryContainer>
             </Wrapper>
@@ -65,8 +78,9 @@ const HistoryContainer = styled.div`
 `
 const PurchaseHistory = styled.div`
     width: 400px;
-    height: 120px;
-    background: linear-gradient(
+    height: auto;
+    background: linear-gradient( 45deg,
+        ${props => props.theme[props.type].light},
         ${props => props.theme[props.type].lighter},
         ${props => props.theme[props.type].light}
         );
@@ -76,9 +90,24 @@ const PurchaseHistory = styled.div`
     justify-content: center;
     padding: 10px;
     margin: 15px;
-    overflow-y: auto;
+    box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.5);
     div{
-        color: black;
-        font-size: 15px;   
+        color: ${props => props.theme[props.type].dark};
+        font-size: 15px;
+        background:  linear-gradient( to right,
+            ${props => props.theme[props.type].light},
+            ${props => props.theme[props.type].lighter},
+            ${props => props.theme[props.type].light}
+            );
+        border-radius: 5px;
+        margin-bottom: 8px;
+        box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.5);
+        overflow: auto;
+        padding: 3px;
+    }
+    img{
+        width: 60px;
+        border-radius: 10px;
+        margin: 5px;
     }
 `
