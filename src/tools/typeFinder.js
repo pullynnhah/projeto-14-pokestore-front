@@ -9,6 +9,7 @@ export default function typeFinder(type, removeNull = true) {
     "ground",
     "psychic",
     "bug",
+    "legendary",
   ];
 
   if (removeNull && !types.includes(type)) {
