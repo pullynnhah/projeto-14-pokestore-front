@@ -8,6 +8,7 @@ import Descriptor from "../Descriptor";
 import typeFinder from "../../tools/typeFinder";
 import AddCartButton from "../AddCartButton";
 import Counter from "../Counter";
+import Types from "../Types";
 
 export default function PokemonPage() {
   const {pokedexNumber: pokedexNum} = useParams();
@@ -35,6 +36,7 @@ export default function PokemonPage() {
   // TODO: add display for types and legendary pokémon
   const {classfication, name, type1, type2, isLegendary, price, image} = pokemon;
   const type = typeFinder(type1);
+  const types = [typeFinder(type1), typeFinder(type2)];
 
   return (
     <Page type={type}>
@@ -42,6 +44,7 @@ export default function PokemonPage() {
         <img src={image} alt={name} />
         <h1>{name}</h1>
         <p className="class">{classfication}</p>
+        <Types types={types} />
         <Descriptor {...pokemon} type={type} />
         <p className="price">$ {totalPrice.toFixed(2)}</p>
         <Counter
