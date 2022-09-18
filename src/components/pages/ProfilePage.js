@@ -5,7 +5,7 @@ import GlobalContext from "../../tools/GlobalContext.js";
 
 import Header from "../commons/Header.js";
 import Footer from "../commons/Footer.js";
-import {GetUser} from "../../tools/UseAxios.js";
+import {getUser} from "../../tools/UseAxios.js";
 import Loader from "../commons/Loader";
 
 function ProfilePage() {
@@ -27,7 +27,7 @@ function ProfilePage() {
   }
 
   useEffect(() => {
-    const promise = GetUser(profile);
+    const promise = getUser(profile);
     promise.then(res => {
       setUserData(res.data);
     });

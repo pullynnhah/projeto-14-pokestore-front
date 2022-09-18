@@ -2,7 +2,7 @@ import {useState, useContext} from "react";
 import {useNavigate, Link} from "react-router-dom";
 import styled from "styled-components";
 import GlobalContext from "../../tools/GlobalContext.js";
-import {Login} from "../../tools/UseAxios.js";
+import {login} from "../../tools/UseAxios.js";
 import logo from "../../assets/images/logo.png";
 import LoadSpinners from "../../assets/styles/LoadSpinners.js";
 
@@ -19,7 +19,7 @@ function LoginPage() {
       email: e.target[0].value,
       password: e.target[1].value,
     };
-    Login(body)
+    login(body)
       .then(async res => {
         const data = {
           token: res.data.token,
@@ -39,54 +39,51 @@ function LoginPage() {
   }
 
   return (
-    <Wrapper>
-      <Container>
-        <Logo>
-          <img src={logo} alt="logo" />
-        </Logo>
-        <LoginForm onSubmit={handleForm}>
-          <input type="email" name="email" placeholder="email" disabled={isDisable} required />
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            disabled={isDisable}
-            required
-          />
-          <Loginbutton disabled={isDisable} bluur={isDisable}>
-            {<LoadSpinners isDisable={isDisable}>Log-in</LoadSpinners>}
-          </Loginbutton>
-        </LoginForm>
-        <Link to={`/signup`}>
-          <New>First time here? Sign-Up!</New>
-        </Link>
-      </Container>
-    </Wrapper>
+    <Container>
+      <Logo>
+        <img src={logo} alt="logo" />
+      </Logo>
+      <LoginForm onSubmit={handleForm}>
+        <input type="email" name="email" placeholder="email" disabled={isDisable} required />
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          disabled={isDisable}
+          required
+        />
+        <Loginbutton disabled={isDisable} bluur={isDisable}>
+          {<LoadSpinners isDisable={isDisable}>Log-in</LoadSpinners>}
+        </Loginbutton>
+      </LoginForm>
+      <Link to={`/signup`}>
+        <New>First time here? Sign-Up!</New>
+      </Link>
+    </Container>
   );
 }
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background: linear-gradient(
     ${props => props.theme.default.light},
     ${props => props.theme.default.lighter}
   );
 `;
+
 const Logo = styled.h1`
   width: 80vw;
+  max-width: 400px;
   margin-bottom: 50px;
   display: flex;
   justify-content: center;
 `;
+
 const New = styled.p`
   font-size: 14px;
   font-family: "Nunito", sans-serif;
@@ -97,6 +94,7 @@ const New = styled.p`
     text-decoration: none;
   }
 `;
+
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -121,6 +119,7 @@ const LoginForm = styled.form`
     color: ${props => props.theme.default.dark};
   }
 `;
+
 const Loginbutton = styled.button`
   height: 45px;
   width: 300px;

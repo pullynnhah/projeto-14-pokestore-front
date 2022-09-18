@@ -5,7 +5,7 @@ import {IoSettings, IoLogOut} from "react-icons/io5";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import LoadSpinners from "../../assets/styles/LoadSpinners.js";
-import {Logout} from "../../tools/UseAxios.js";
+import {logout} from "../../tools/UseAxios.js";
 import {useContext} from "react";
 import GlobalContext from "../../tools/GlobalContext.js";
 
@@ -32,7 +32,7 @@ export default function Header({type}) {
   function logoutConfirm(props) {
     setClicked(false);
     if (props) {
-      Logout(profile)
+      logout(profile)
         .then(async res => {
           await localStorage.clear();
           setIsDisable(!isDisable);

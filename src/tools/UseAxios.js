@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-function Login(body) {
+function login(body) {
   return axios.post(`${process.env.REACT_APP_API_URI}/login`, body);
 }
 
@@ -11,7 +11,7 @@ function getPokemons(body) {
   return axios.get(`${process.env.REACT_APP_API_URI}/pokemons?type=${body.type}`);
 }
 
-function SignUp(body) {
+function signUp(body) {
   return axios.post(`${process.env.REACT_APP_API_URI}/signup`, body);
 }
 
@@ -28,7 +28,7 @@ function getHistory(body) {
   return axios.get(`${process.env.REACT_APP_API_URI}/history`, config);
 }
 
-function Logout(profile) {
+function logout(profile) {
   const config = {
     headers: {
       user: profile.userId,
@@ -37,7 +37,7 @@ function Logout(profile) {
   return axios.delete(`${process.env.REACT_APP_API_URI}/logout`, config);
 }
 
-function GetUser(profile) {
+function getUser(profile) {
   const config = {
     headers: {
       user: profile.userId,
@@ -47,7 +47,7 @@ function GetUser(profile) {
   return axios.get(`${process.env.REACT_APP_API_URI}/user`, config);
 }
 
-function UpdateUser(profile, body) {
+function updateUser(profile, body) {
   const config = {
     headers: {
       user: profile.userId,
@@ -92,16 +92,16 @@ function addCartItem(quantity, pokedexNumber, profile) {
 }
 
 export {
-  SignUp,
-  Login,
-  Logout,
+  signUp,
+  login,
+  logout,
   getPokemon,
   getPokemons,
   getHistory,
   listCart,
   delCartItem,
   checkoutCart,
-  GetUser,
-  UpdateUser,
+  getUser,
+  updateUser,
   addCartItem,
 };
