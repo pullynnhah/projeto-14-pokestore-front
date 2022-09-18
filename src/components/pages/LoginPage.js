@@ -44,7 +44,7 @@ function LoginPage() {
         <Logo>
           <img src={logo} alt="logo" />
         </Logo>
-        <Loginform onSubmit={handleForm}>
+        <LoginForm onSubmit={handleForm}>
           <input type="email" name="email" placeholder="email" disabled={isDisable} required />
           <input
             type="password"
@@ -56,7 +56,7 @@ function LoginPage() {
           <Loginbutton disabled={isDisable} bluur={isDisable}>
             {<LoadSpinners isDisable={isDisable}>Log-in</LoadSpinners>}
           </Loginbutton>
-        </Loginform>
+        </LoginForm>
         <Link to={`/signup`}>
           <New>First time here? Sign-Up!</New>
         </Link>
@@ -88,7 +88,7 @@ const Logo = styled.h1`
   justify-content: center;
 `;
 const New = styled.p`
-  font-size: 14;
+  font-size: 14px;
   font-family: "Nunito", sans-serif;
   color: ${props => props.theme.default.medium};
   text-decoration-line: underline;
@@ -97,7 +97,7 @@ const New = styled.p`
     text-decoration: none;
   }
 `;
-const Loginform = styled.form`
+const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -128,11 +128,10 @@ const Loginbutton = styled.button`
   align-items: center;
   justify-content: center;
   background-color: ${props => props.theme.default.dark};
-  border: none;
   border-radius: 5px;
   font-size: 21px;
   font-family: "Nunito", sans-serif;
-  color: #ffffff;
+  color: ${props => props.theme.white};
   margin-bottom: 25px;
   opacity: ${props => (props.bluur ? 0.7 : 1)};
 `;
