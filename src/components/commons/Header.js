@@ -26,15 +26,7 @@ export default function Header({type}) {
   function openClick() {
     setClicked(!clicked);
   }
-  const profiles = [
-    userLogo,
-    bulbasaurProfile,
-    charmanderProfile,
-    squirtleProfile,
-    squirtleProfile,
-    pikachuProfile,
-  ];
-
+  const profiles = [userLogo, bulbasaurProfile, charmanderProfile, squirtleProfile, pikachuProfile];
   const userPicture = profiles[storage.userPicture];
 
   function logoutConfirm(props) {
@@ -61,12 +53,9 @@ export default function Header({type}) {
   return (
     <Wrapper type={type}>
       <img src={logo} alt="Pokéstore logo" className="logo" />
-      <FaShoppingCart className="icon" />
+      <FaShoppingCart className="icon" onClick={() => navigate("/cart")} />
       <Menu clicked={clicked} type={type}>
-        <div
-          onClick={() => {
-            return navigate("/profile");
-          }}>
+        <div onClick={() => navigate("/profile")}>
           <IoSettings className="icon" />
         </div>
 
