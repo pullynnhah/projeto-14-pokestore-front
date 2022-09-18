@@ -13,8 +13,7 @@ import squirtleProfile from "../../assets/images/squirtleProfile.png";
 import pikachuProfile from "../../assets/images/pikachuProfile.png";
 
 function EditProfilePage() {
-  // eslint-disable-next-line
-  const {profile, setProfile} = useContext(GlobalContext);
+  const {profile} = useContext(GlobalContext);
   const [isDisable, SetIsDisable] = useState(false);
   const [userData, setUserData] = useState(false);
   const [choosenPicture, setChoosenPicture] = useState(profile.userPicture);
@@ -26,8 +25,6 @@ function EditProfilePage() {
       setUserData(res.data);
     });
   }, [profile]);
-
-  console.log(userData);
 
   function handleForm(e) {
     e.preventDefault();
