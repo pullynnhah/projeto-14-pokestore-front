@@ -12,7 +12,7 @@ function LoginPage() {
   const [isDisable, setIsDisable] = useState(false);
   const navigate = useNavigate();
 
-  function handleForm(e) {
+  async function handleForm(e) {
     e.preventDefault();
     setIsDisable(true);
     const body = {
@@ -21,15 +21,14 @@ function LoginPage() {
     };
     Login(body)
       .then(async res => {
-        await localStorage.setItem(
-          "profile",
-          JSON.stringify({
-            token: res.data.token,
-            userId: res.data.userId,
-            userPicture: res.data.userPicture,
-          })
-        );
-        setProfile(JSON.parse(localStorage.getItem("profile")));
+        const data = {
+          token: res.data.token,
+          userId: res.data.userId,
+          userPicture: res.data.userPicture,
+        };
+
+        await localStorage.setItem("profile", JSON.stringify(data));
+        setProfile(data);
         return navigate("/home");
       })
       .catch(error => {
@@ -67,7 +66,6 @@ function LoginPage() {
 }
 
 const Wrapper = styled.div`
-  height: 100%;
   width: 100%;
   height: 100vh;
 `;
@@ -94,6 +92,7 @@ const New = styled.p`
   font-family: "Nunito", sans-serif;
   color: ${props => props.theme.default.medium};
   text-decoration-line: underline;
+
   a {
     text-decoration: none;
   }
@@ -102,6 +101,7 @@ const Loginform = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   input {
     width: 303px;
     height: 45px;
@@ -110,11 +110,13 @@ const Loginform = styled.form`
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 15px;
+
     ::placeholder {
       font-weight: 400;
       color: ${props => props.theme.default.medium};
       font-style: italic;
     }
+
     font: 600 22px/26px "Nunito", sans-serif;
     color: ${props => props.theme.default.dark};
   }

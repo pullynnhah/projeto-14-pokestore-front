@@ -3,7 +3,15 @@ import styled from "styled-components";
 export default function Types({types}) {
   return (
     <Wrapper>
-      {types.map(type => (!type.name ? "" : <Type type={type.color}>{type.name}</Type>))}
+      {types.map((type, index) =>
+        !type.name ? (
+          ""
+        ) : (
+          <Type type={type.color} key={index}>
+            {type.name}
+          </Type>
+        )
+      )}
     </Wrapper>
   );
 }

@@ -78,7 +78,17 @@ function checkout(profile) {
       user: profile.userId,
     },
   };
-  return axios.post(`${process.env.REACT_APP_API_URI}/checkout`, config);
+  return axios.post(`${process.env.REACT_APP_API_URI}/checkout`, {}, config);
+}
+
+function addCartItem(quantity, pokedexNumber, profile) {
+  const config = {
+    headers: {
+      pokedex: pokedexNumber,
+      user: profile.userId,
+    },
+  };
+  return axios.post(`${process.env.REACT_APP_API_URI}/cart`, {quantity}, config);
 }
 
 export {
@@ -93,4 +103,5 @@ export {
   checkout,
   GetUser,
   UpdateUser,
+  addCartItem,
 };

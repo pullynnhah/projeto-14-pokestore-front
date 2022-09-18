@@ -56,7 +56,7 @@ export default function PokemonPage() {
           price={price}
           setTotalPrice={setTotalPrice}
         />
-        <AddCartButton type={type} />
+        <AddCartButton type={type} quantity={count} pokedexNumber={pokedexNum} />
       </Wrapper>
     </Page>
   );
