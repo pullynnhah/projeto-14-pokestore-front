@@ -61,7 +61,7 @@ export default function HistoryPage({type}) {
               <p>Pokemon: {name}</p>
               <p>Quantity: {quantity}</p>
               <p>Unit price: $ {price}.toFixed(2)</p>
-              <h2>Total price: $ {(quantity * price).toFixed(2)}</h2>
+              <p>Total price: $ {(quantity * price).toFixed(2)}</p>
               {
                 <div>
                   {images.map(img => (
@@ -97,6 +97,7 @@ const HistoryContainer = styled.div`
   flex-wrap: wrap;
   margin-top: 25px;
 `;
+
 const PurchaseHistory = styled.div`
   width: 400px;
   height: auto;
@@ -114,7 +115,7 @@ const PurchaseHistory = styled.div`
   margin: 15px;
   box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.5);
 
-  div {
+  p {
     color: ${props => props.theme[props.type].dark};
     font-size: 15px;
     background: linear-gradient(
