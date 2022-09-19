@@ -74,7 +74,6 @@ export const theme = {
     medium: "#eba802",
     dark: "#cc8801",
   },
-
   cart: {
     lighter: "#c3dcff",
     light: "#0064fa",

@@ -7,7 +7,7 @@ import GlobalContext from "../tools/GlobalContext";
 export default function Product({cartId, name, type, isLegendary, image, price, quantity, del}) {
   const {profile} = useContext(GlobalContext);
   const totalPrice = price * quantity;
-  type = isLegendary ? "legendary" : typeFinder(type, false);
+  type = isLegendary ? "legendary" : typeFinder(type);
 
   return (
     <Wrapper type={type}>
